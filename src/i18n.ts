@@ -262,45 +262,6 @@ export const ui = {
         },
       ],
     },
-    pixieChat: {
-      open: "Chat with Pixie",
-      title: "Pixie",
-      status: "online",
-      demoBadge: "scripted demo",
-      greeting:
-        "Hey! I'm Pixie ⚡ — the community's AI bot. Ask me about tickets, translation, the team or how to join. Heads up: this is a scripted demo — the real me lives in our Discord.",
-      placeholder: "Ask Pixie something…",
-      send: "Send",
-      typing: "Pixie is typing…",
-      fallback:
-        "Demo me has a limited vocabulary 😅 Try asking about: tickets, translate, join, team or github.",
-      answers: [
-        {
-          keys: ["ticket", "support", "report", "тикет", "репорт", "поддерж"],
-          text: "Tickets are private support channels between you and the mod team. In Discord, find the tickets panel, press a button, pick a category — done, your private channel appears instantly.",
-        },
-        {
-          keys: ["translat", "language", "russian", "english", "перевод", "язык"],
-          text: "Speak any language you like! To translate a message, right-click it → Apps → Pixie → Translate. Works on any message in the server.",
-        },
-        {
-          keys: ["join", "invite", "вступ", "инвайт", "зайти"],
-          text: "Easy: hit «Join on Discord» below, pick your roles and say hi in #general. It takes a minute.",
-        },
-        {
-          keys: ["team", "moderator", "admin", "staff", "команд", "модер", "админ"],
-          text: "The team section below shows everyone with the TeamCommunity role. To join the staff: be active, contribute on GitHub, then open a Community ticket — admins review applications when new mods are needed.",
-        },
-        {
-          keys: ["github", "project", "repo", "code", "гитхаб", "проект", "репо"],
-          text: "All our projects are open source in the VibeCoders-Community GitHub org. Fork a repo, open a PR — after your first merged PR you can request an org invite via a Project ticket.",
-        },
-        {
-          keys: ["hi", "hello", "hey", "yo", "привет", "здарова", "хай"],
-          text: "Hey hey! ⚡ What can I tell you about — tickets, translation, the team, or joining us?",
-        },
-      ],
-    },
     activity: {
       eyebrow: "live activity",
       title: "Live from GitHub",
@@ -581,45 +542,6 @@ export const ui = {
           repo: "VibeCoders-Community.github.io",
           name: "VibeCoders-Community.github.io",
           description: "Этот сайт.",
-        },
-      ],
-    },
-    pixieChat: {
-      open: "Чат с Pixie",
-      title: "Pixie",
-      status: "в сети",
-      demoBadge: "скриптовое демо",
-      greeting:
-        "Привет! Я Pixie ⚡ — AI-бот сообщества. Спроси меня про тикеты, перевод, команду или как вступить. Учти: это скриптовое демо — настоящая я живу в нашем Discord.",
-      placeholder: "Спроси Pixie о чём-нибудь…",
-      send: "Отправить",
-      typing: "Pixie печатает…",
-      fallback:
-        "У демо-версии скромный словарный запас 😅 Попробуй спросить про: тикеты, перевод, вступление, команду или github.",
-      answers: [
-        {
-          keys: ["ticket", "support", "report", "тикет", "репорт", "поддерж", "помощ"],
-          text: "Тикеты — приватные каналы поддержки между тобой и модераторами. В Discord найди панель тикетов, нажми кнопку, выбери категорию — приватный канал появится мгновенно.",
-        },
-        {
-          keys: ["translat", "language", "russian", "english", "перевод", "язык", "перевести"],
-          text: "Общайся на любом языке! Чтобы перевести сообщение: ПКМ по нему → Apps → Pixie → Translate. Работает с любым сообщением на сервере.",
-        },
-        {
-          keys: ["join", "invite", "вступ", "инвайт", "зайти", "присоедин"],
-          text: "Проще простого: жми «Вступить в Discord» ниже, выбери роли и поздоровайся в #general. Минутка делов.",
-        },
-        {
-          keys: ["team", "moderator", "admin", "staff", "команд", "модер", "админ", "стафф"],
-          text: "В секции команды ниже — все с ролью TeamCommunity. Чтобы попасть в staff: будь активен, контрибуть на GitHub, затем открой тикет «Community» — админы рассматривают заявки, когда нужны новые модераторы.",
-        },
-        {
-          keys: ["github", "project", "repo", "code", "гитхаб", "проект", "репо", "код"],
-          text: "Все наши проекты в открытом доступе в GitHub-организации VibeCoders-Community. Форкай репозиторий, открывай PR — после первого принятого PR можно запросить инвайт в организацию через тикет «Project».",
-        },
-        {
-          keys: ["hi", "hello", "hey", "yo", "привет", "здарова", "хай", "ку"],
-          text: "Привет-привет! ⚡ О чём рассказать — тикеты, перевод, команда или как к нам попасть?",
         },
       ],
     },

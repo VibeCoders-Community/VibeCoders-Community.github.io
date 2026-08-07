@@ -170,11 +170,13 @@ export const ui = {
           name: "skyricelis",
           role: "Hoster",
           text: "Our hoster — keeps the community's servers and infrastructure online.",
+          avatar: "/team/skyricelis.png",
         },
         {
           name: "daniilalt",
           role: "ML Engineer",
           text: "Machine learning engineer of the community.",
+          avatar: "/team/daniilalt.png",
         },
         {
           name: "NOKK",
@@ -182,6 +184,23 @@ export const ui = {
           text: "Rust, Python, C and C++ developer.",
         },
       ],
+      path: {
+        title: "How to join the team",
+        steps: [
+          {
+            title: "1. Join the Discord",
+            text: "Hop in via the invite, pick your roles and stay active — help others in the channels.",
+          },
+          {
+            title: "2. Contribute on GitHub",
+            text: "Fork any organization repo and open a pull request. After your first merged PR, request an invite to the GitHub organization via a Project ticket.",
+          },
+          {
+            title: "3. Apply for staff",
+            text: "Open a Community ticket and tell us about yourself. Admins invite trusted, active members when new moderators are needed.",
+          },
+        ],
+      },
       roles: [
         {
           icon: "🛡️",
@@ -398,11 +417,13 @@ export const ui = {
           name: "skyricelis",
           role: "Хостер",
           text: "Наш хостер — держит серверы и инфраструктуру сообщества в онлайне.",
+          avatar: "/team/skyricelis.png",
         },
         {
           name: "daniilalt",
           role: "ML-инженер",
           text: "Инженер машинного обучения сообщества.",
+          avatar: "/team/daniilalt.png",
         },
         {
           name: "NOKK",
@@ -410,6 +431,23 @@ export const ui = {
           text: "Разработчик на Rust, Python, C и C++.",
         },
       ],
+      path: {
+        title: "Как попасть в команду",
+        steps: [
+          {
+            title: "1. Вступи в Discord",
+            text: "Заходи по инвайту, выбери роли и будь активен — помогай другим в каналах.",
+          },
+          {
+            title: "2. Контрибуть на GitHub",
+            text: "Форкни любой репозиторий организации и открой pull request. После первого принятого PR запроси инвайт в GitHub-организацию через тикет «Project».",
+          },
+          {
+            title: "3. Подай заявку в staff",
+            text: "Открой тикет «Community» и расскажи о себе. Админы приглашают в команду проверенных активных участников, когда нужны новые модераторы.",
+          },
+        ],
+      },
       roles: [
         {
           icon: "🛡️",

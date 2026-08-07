@@ -165,6 +165,23 @@ export const ui = {
         role: "Owner & Founder",
         text: "Builds the community infrastructure: bots, ticket system, automation and this website.",
       },
+      members: [
+        {
+          name: "skyricelis",
+          role: "Hoster",
+          text: "Our hoster — keeps the community's servers and infrastructure online.",
+        },
+        {
+          name: "daniilalt",
+          role: "ML Engineer",
+          text: "Machine learning engineer of the community.",
+        },
+        {
+          name: "NOKK",
+          role: "Software Engineer",
+          text: "Rust, Python, C and C++ developer.",
+        },
+      ],
       roles: [
         {
           icon: "🛡️",
@@ -376,6 +393,23 @@ export const ui = {
         role: "Владелец и основатель",
         text: "Строит инфраструктуру сообщества: боты, тикет-система, автоматизация и этот сайт.",
       },
+      members: [
+        {
+          name: "skyricelis",
+          role: "Хостер",
+          text: "Наш хостер — держит серверы и инфраструктуру сообщества в онлайне.",
+        },
+        {
+          name: "daniilalt",
+          role: "ML-инженер",
+          text: "Инженер машинного обучения сообщества.",
+        },
+        {
+          name: "NOKK",
+          role: "Софтинженер",
+          text: "Разработчик на Rust, Python, C и C++.",
+        },
+      ],
       roles: [
         {
           icon: "🛡️",

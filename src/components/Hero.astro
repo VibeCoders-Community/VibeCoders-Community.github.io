@@ -1,0 +1,76 @@
+---
+---
+
+<section class="relative overflow-hidden py-28 text-center md:py-36">
+  <div
+    class="pointer-events-none absolute inset-x-0 -top-48 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.35),transparent_70%),radial-gradient(closest-side,rgba(0,212,255,0.18),transparent_70%)] bg-[position:30%_50%,70%_40%] bg-no-repeat"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto max-w-5xl px-6">
+    <p class="mb-6 inline-block rounded-full border border-border bg-bg-alt px-4 py-1.5 font-mono text-sm text-accent-2">
+      ⚡ developer community
+    </p>
+    <h1 class="mb-5 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl">
+      Code with <span class="bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">good vibes</span>
+    </h1>
+    <p class="mx-auto mb-9 max-w-xl text-lg text-muted">
+      VibeCoders is a friendly Discord community of developers who build, learn and ship together.
+      Ask questions, share projects, find teammates.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a
+        href="#join"
+        class="rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline transition-shadow hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
+      >
+        Join the community
+      </a>
+      <a
+        href="#projects"
+        class="rounded-xl border border-border bg-white/[0.02] px-7 py-3.5 font-semibold no-underline transition-colors hover:bg-white/[0.06]"
+      >
+        See our projects
+      </a>
+    </div>
+    <div class="mt-16 flex flex-wrap justify-center gap-12">
+      <div>
+        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="100" data-suffix="+">0</span>
+        <span class="text-sm text-muted">members</span>
+      </div>
+      <div>
+        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="24" data-suffix="/7">0</span>
+        <span class="text-sm text-muted">support</span>
+      </div>
+      <div>
+        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="0" data-suffix="">0</span>
+        <span class="text-sm text-muted">toxicity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const animate = (el: HTMLElement) => {
+    const target = Number(el.dataset.count ?? 0);
+    const suffix = el.dataset.suffix ?? "";
+    const dur = 900;
+    const t0 = performance.now();
+    const tick = (t: number) => {
+      const p = Math.min((t - t0) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + (p === 1 ? suffix : "");
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          animate(e.target as HTMLElement);
+          io.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.6 },
+  );
+  document.querySelectorAll<HTMLElement>("[data-count]").forEach((c) => io.observe(c));
+</script>

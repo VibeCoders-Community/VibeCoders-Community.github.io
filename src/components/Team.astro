@@ -32,6 +32,18 @@ const t = getUi(lang);
         </p>
         <p class="text-sm text-muted">{t.team.owner.text}</p>
       </article>
+      {t.team.members.map((m) => (
+        <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-2xl font-extrabold text-white">
+            {m.name.charAt(0).toUpperCase()}
+          </div>
+          <h3 class="text-lg font-bold">{m.name}</h3>
+          <p class="mb-2 font-mono text-xs font-semibold tracking-wider text-accent-2 uppercase">
+            {m.role}
+          </p>
+          <p class="text-sm text-muted">{m.text}</p>
+        </article>
+      ))}
       {t.team.roles.map((r) => (
         <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
           <div class="mb-4 text-3xl">{r.icon}</div>

@@ -34,9 +34,20 @@ const t = getUi(lang);
       </article>
       {t.team.members.map((m) => (
         <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-2xl font-extrabold text-white">
-            {m.name.charAt(0).toUpperCase()}
-          </div>
+          {m.avatar ? (
+            <img
+              src={m.avatar}
+              alt={`${m.name} avatar`}
+              width="64"
+              height="64"
+              loading="lazy"
+              class="mb-4 h-16 w-16 rounded-full object-cover ring-2 ring-border"
+            />
+          ) : (
+            <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-2xl font-extrabold text-white">
+              {m.name.charAt(0).toUpperCase()}
+            </div>
+          )}
           <h3 class="text-lg font-bold">{m.name}</h3>
           <p class="mb-2 font-mono text-xs font-semibold tracking-wider text-accent-2 uppercase">
             {m.role}
@@ -49,6 +60,15 @@ const t = getUi(lang);
           <div class="mb-4 text-3xl">{r.icon}</div>
           <h3 class="mb-2 text-lg font-bold">{r.title}</h3>
           <p class="text-sm text-muted">{r.text}</p>
+        </article>
+      ))}
+    </div>
+    <h3 class="mt-16 mb-8 text-center text-2xl font-extrabold tracking-tight">{t.team.path.title}</h3>
+    <div class="grid gap-5 sm:grid-cols-3">
+      {t.team.path.steps.map((s) => (
+        <article class="rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-accent">
+          <h4 class="mb-2 font-bold text-accent-2">{s.title}</h4>
+          <p class="text-sm text-muted">{s.text}</p>
         </article>
       ))}
     </div>

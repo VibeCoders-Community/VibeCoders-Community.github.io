@@ -67,6 +67,43 @@ const ogImage = new URL("/og-image.png", Astro.site);
         els.forEach((el) => io.observe(el));
       };
       document.addEventListener("astro:page-load", initReveal);
+
+      // Cursor-tracked glow + pixel-cube button effects.
+      const initFx = () => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        // Spotlight / card glow: track pointer, expose --mx/--my in px.
+        const track = (el: HTMLElement) => {
+          if (el.dataset.fxTrack) return;
+          el.dataset.fxTrack = "1";
+          el.addEventListener("pointermove", (ev) => {
+            const r = el.getBoundingClientRect();
+            el.style.setProperty("--mx", `${ev.clientX - r.left}px`);
+            el.style.setProperty("--my", `${ev.clientY - r.top}px`);
+          });
+        };
+        document
+          .querySelectorAll<HTMLElement>(".spotlight, article")
+          .forEach(track);
+
+        // Pixel grid overlay for .btn-fx buttons.
+        document
+          .querySelectorAll<HTMLElement>(".btn-fx")
+          .forEach((btn) => {
+            if (btn.querySelector(".fx-grid")) return;
+            const grid = document.createElement("span");
+            grid.className = "fx-grid";
+            grid.setAttribute("aria-hidden", "true");
+            for (let i = 0; i < 48; i++) {
+              const cell = document.createElement("span");
+              cell.className = "fx-cell";
+              cell.style.setProperty("--d", `${Math.floor(Math.random() * 350)}ms`);
+              grid.appendChild(cell);
+            }
+            btn.appendChild(grid);
+          });
+      };
+      document.addEventListener("astro:page-load", initFx);
     </script>
   </body>
 </html>

@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section class="relative overflow-hidden py-28 text-center md:py-36">
+<section class="spotlight relative overflow-hidden py-28 text-center md:py-36">
   <div
     class="pointer-events-none absolute inset-x-0 -top-48 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.35),transparent_70%),radial-gradient(closest-side,rgba(0,212,255,0.18),transparent_70%)] bg-[position:30%_50%,70%_40%] bg-no-repeat"
     aria-hidden="true"
@@ -27,7 +27,7 @@ const t = getUi(lang);
     <div class="flex flex-wrap justify-center gap-4">
       <a
         href="#join"
-        class="rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline transition-shadow hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
+        class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline transition-shadow hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
       >
         {t.hero.ctaJoin}
       </a>

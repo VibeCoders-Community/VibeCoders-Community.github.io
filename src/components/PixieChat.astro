@@ -1,0 +1,111 @@
+---
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
+---
+
+<button
+  id="pixie-open"
+  class="fixed right-6 bottom-6 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full border-0 bg-gradient-to-br from-accent to-accent-2 shadow-[0_8px_30px_rgba(124,92,255,0.5)] transition-transform hover:scale-110"
+  aria-label={t.pixieChat.open}
+  title={t.pixieChat.open}
+>
+  <img src="/logo.svg" alt="" width="28" height="28" />
+</button>
+
+<div
+  id="pixie-panel"
+  class="fixed right-6 bottom-24 z-50 hidden w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl border border-border bg-bg-alt shadow-2xl"
+>
+  <div class="flex items-center gap-3 border-b border-border bg-card px-4 py-3">
+    <img src="/logo.svg" alt="" width="28" height="28" class="rounded-full" />
+    <div class="mr-auto">
+      <p class="text-sm font-bold">{t.pixieChat.title}</p>
+      <p class="font-mono text-[10px] tracking-wider text-accent-2 uppercase">{t.pixieChat.demoBadge}</p>
+    </div>
+    <button id="pixie-close" class="cursor-pointer border-0 bg-transparent p-1 text-lg text-muted hover:text-text" aria-label="Close">✕</button>
+  </div>
+  <div id="pixie-messages" class="flex h-72 flex-col gap-2 overflow-y-auto p-4"></div>
+  <form id="pixie-form" class="flex gap-2 border-t border-border p-3">
+    <input
+      id="pixie-input"
+      type="text"
+      placeholder={t.pixieChat.placeholder}
+      autocomplete="off"
+      class="min-w-0 flex-1 rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text outline-none placeholder:text-muted focus:border-accent"
+    />
+    <button
+      type="submit"
+      class="shrink-0 cursor-pointer rounded-lg border-0 bg-gradient-to-br from-accent to-accent-2 px-4 py-2 text-sm font-semibold text-white"
+    >
+      {t.pixieChat.send}
+    </button>
+  </form>
+</div>
+
+<script define:vars={{ chatStrings: { typing: t.pixieChat.typing, fallback: t.pixieChat.fallback, greeting: t.pixieChat.greeting, answers: t.pixieChat.answers } }}>
+  const openBtn = document.getElementById("pixie-open");
+  const panel = document.getElementById("pixie-panel");
+  const closeBtn = document.getElementById("pixie-close");
+  const messages = document.getElementById("pixie-messages");
+  const form = document.getElementById("pixie-form");
+  const input = document.getElementById("pixie-input");
+
+  if (openBtn && !openBtn.dataset.init) {
+    openBtn.dataset.init = "1";
+    let greeted = false;
+
+    const scroll = () => (messages.scrollTop = messages.scrollHeight);
+
+    const addMsg = (text, from) => {
+      const el = document.createElement("div");
+      el.textContent = text;
+      el.className =
+        from === "user"
+          ? "ml-8 self-end rounded-xl rounded-br-sm bg-gradient-to-br from-accent to-accent-2 px-3 py-2 text-sm text-white"
+          : "mr-8 self-start rounded-xl rounded-bl-sm bg-card px-3 py-2 text-sm text-text";
+      messages.appendChild(el);
+      scroll();
+      return el;
+    };
+
+    const reply = (question) => {
+      const typing = addMsg(chatStrings.typing, "bot");
+      typing.classList.add("animate-pulse", "text-muted");
+      const q = question.toLowerCase();
+      const hit = chatStrings.answers.find((a) => a.keys.some((k) => q.includes(k)));
+      const text = hit ? hit.text : chatStrings.fallback;
+      setTimeout(() => {
+        typing.remove();
+        addMsg(text, "bot");
+      }, 500 + Math.random() * 700);
+    };
+
+    openBtn.addEventListener("click", () => {
+      panel.classList.toggle("hidden");
+      panel.classList.toggle("flex");
+      if (!greeted) {
+        greeted = true;
+        addMsg(chatStrings.greeting, "bot");
+      }
+      input.focus();
+    });
+    closeBtn.addEventListener("click", () => {
+      panel.classList.add("hidden");
+      panel.classList.remove("flex");
+    });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const q = input.value.trim();
+      if (!q) return;
+      addMsg(q, "user");
+      input.value = "";
+      reply(q);
+    });
+  }
+</script>

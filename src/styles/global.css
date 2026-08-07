@@ -42,3 +42,85 @@ body {
     transition: none;
   }
 }
+
+/* ---------- Cursor spotlight (hero) ---------- */
+.spotlight {
+  position: relative;
+}
+
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 40%),
+    rgba(124, 92, 255, 0.14),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Card glow follows cursor ---------- */
+article {
+  position: relative;
+}
+
+article::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--mx, 50%) var(--my, -20%),
+    rgba(0, 212, 255, 0.09),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+article:hover::before {
+  opacity: 1;
+}
+
+/* ---------- Pixel-cube hover effect on buttons (.btn-fx) ---------- */
+.btn-fx {
+  position: relative;
+  overflow: hidden;
+}
+
+.fx-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  pointer-events: none;
+}
+
+.fx-cell {
+  background: #fff;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.btn-fx:hover .fx-cell {
+  opacity: 0.22;
+  transition-delay: var(--d, 0ms);
+}
+
+.btn-fx .fx-cell:nth-child(3n) {
+  background: var(--color-accent-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight::after,
+  article::before {
+    display: none;
+  }
+
+  .fx-grid {
+    display: none;
+  }
+}

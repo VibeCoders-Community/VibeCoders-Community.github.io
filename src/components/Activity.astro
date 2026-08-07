@@ -1,0 +1,97 @@
+---
+import { getUi, type Lang } from "../i18n";
+import { GITHUB_ORG_URL } from "../config";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
+---
+
+<section id="activity" class="reveal border-y border-border bg-bg-alt py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.activity.title}</h2>
+    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">{t.activity.subtitle}</p>
+    <ul
+      id="activity-feed"
+      class="mx-auto grid max-w-3xl gap-3"
+      data-org-url={GITHUB_ORG_URL}
+      data-error={t.activity.error}
+      data-lang={lang}
+      data-labels={JSON.stringify({
+        PushEvent: t.activity.pushed,
+        PullRequestEvent: t.activity.pr,
+        IssuesEvent: t.activity.issue,
+        CreateEvent: t.activity.created,
+        ReleaseEvent: t.activity.release,
+        WatchEvent: t.activity.starred,
+        other: t.activity.other,
+      })}
+    ></ul>
+  </div>
+</section>
+
+<script>
+  interface GhEvent {
+    id: string;
+    type: string;
+    created_at: string;
+    repo: { name: string };
+    actor: { display_login: string; avatar_url: string };
+  }
+
+  const feed = document.getElementById("activity-feed") as HTMLUListElement | null;
+
+  if (feed && !feed.dataset.init) {
+    feed.dataset.init = "1";
+    const orgUrl = feed.dataset.orgUrl!;
+    const lang = feed.dataset.lang === "ru" ? "ru-RU" : "en-US";
+    const labels = JSON.parse(feed.dataset.labels!) as Record<string, string>;
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
+    const rtf = new Intl.RelativeTimeFormat(lang, { numeric: "auto" });
+    const relTime = (iso: string) => {
+      const diff = Date.now() - new Date(iso).getTime();
+      const mins = Math.round(diff / 60000);
+      if (mins < 60) return rtf.format(-mins, "minute");
+      const hours = Math.round(mins / 60);
+      if (hours < 24) return rtf.format(-hours, "hour");
+      return rtf.format(-Math.round(hours / 24), "day");
+    };
+
+    const fail = () => {
+      feed.innerHTML = `<li class="rounded-xl border border-border bg-card p-5 text-center text-sm text-muted">
+        <a href="${orgUrl}" target="_blank" rel="noopener" class="no-underline hover:text-text">${esc(feed.dataset.error!)}</a>
+      </li>`;
+    };
+
+    fetch("https://api.github.com/orgs/VibeCoders-Community/events?per_page=30")
+      .then((r) => {
+        if (!r.ok) throw new Error(String(r.status));
+        return r.json() as Promise<GhEvent[]>;
+      })
+      .then((events) => {
+        const items = events.slice(0, 6);
+        if (!items.length) return fail();
+        feed.innerHTML = items
+          .map((e) => {
+            const action = labels[e.type] ?? labels.other;
+            const repo = e.repo.name.split("/")[1] ?? e.repo.name;
+            return `<li class="flex items-center gap-4 rounded-xl border border-border bg-card p-4">
+              <img src="${e.actor.avatar_url}&s=64" alt="" width="36" height="36" loading="lazy" class="h-9 w-9 shrink-0 rounded-full ring-1 ring-border" />
+              <p class="min-w-0 flex-1 text-sm">
+                <span class="font-semibold">${esc(e.actor.display_login)}</span>
+                <span class="text-muted"> ${esc(action)} </span>
+                <span class="font-mono text-accent-2">${esc(repo)}</span>
+              </p>
+              <span class="shrink-0 font-mono text-xs text-muted">${relTime(e.created_at)}</span>
+            </li>`;
+          })
+          .join("");
+      })
+      .catch(fail);
+  }
+</script>

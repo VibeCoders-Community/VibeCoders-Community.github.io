@@ -10,23 +10,26 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="projects" class="reveal py-24">
+<section id="projects" class="reveal scroll-mt-20 py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.projects.title}</h2>
-    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">
-      {t.projects.subtitle}
-    </p>
-    <div id="repo-grid" class="grid gap-5 sm:grid-cols-2" data-org={GITHUB_ORG}>
+    <div class="mb-12 text-center">
+      <p class="eyebrow mb-4">{t.projects.eyebrow}</p>
+      <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.projects.title}</h2>
+      <p class="mx-auto max-w-2xl text-lg text-muted">
+        {t.projects.subtitle}
+      </p>
+    </div>
+    <div id="repo-grid" class="grid gap-6 sm:grid-cols-2" data-org={GITHUB_ORG}>
       {t.projects.cards.map((c) => (
         <article
-          class="rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent"
+          class="card-hover rounded-2xl border border-border bg-card"
           data-repo={c.repo}
         >
           <a
             href={`https://github.com/${GITHUB_ORG}/${c.repo}`}
             target="_blank"
             rel="noopener"
-            class="block p-7 no-underline"
+            class="block p-6 no-underline"
           >
             <h3 class="mb-2 text-lg font-bold">{c.name}</h3>
             <p class="text-sm text-muted">{c.description}</p>

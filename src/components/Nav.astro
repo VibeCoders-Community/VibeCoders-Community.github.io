@@ -32,7 +32,7 @@ const langSwitch = [
     </a>
     <nav id="nav-links" class="ml-auto hidden gap-6 md:flex">
       {links.map((l) => (
-        <a href={l.href} class="text-sm text-muted no-underline transition-colors hover:text-text">
+        <a href={l.href} class="nav-link text-sm text-muted no-underline hover:text-text">
           {l.label}
         </a>
       ))}
@@ -54,7 +54,7 @@ const langSwitch = [
       href={GITHUB_ORG_URL}
       target="_blank"
       rel="noopener"
-      class="hidden rounded-lg border border-border bg-white/[0.02] px-4 py-2 text-sm font-semibold no-underline transition-colors hover:bg-white/[0.06] sm:block"
+      class="btn-ghost hidden rounded-lg border border-border bg-white/[0.02] px-4 py-2 text-sm font-semibold no-underline sm:block"
     >
       GitHub
     </a>
@@ -66,7 +66,7 @@ const langSwitch = [
   </div>
   <nav id="mobile-menu" class="hidden flex-col gap-4 border-b border-border bg-bg-alt px-6 py-4 md:hidden">
     {links.map((l) => (
-      <a href={l.href} class="mobile-link text-sm text-muted no-underline hover:text-text">
+      <a href={l.href} class="mobile-link text-sm text-muted no-underline transition-colors duration-200 hover:text-text">
         {l.label}
       </a>
     ))}

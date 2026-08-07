@@ -10,10 +10,13 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="activity" class="reveal border-y border-border bg-bg-alt py-24">
+<section id="activity" class="reveal scroll-mt-20 border-y border-border bg-bg-alt py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.activity.title}</h2>
-    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">{t.activity.subtitle}</p>
+    <div class="mb-12 text-center">
+      <p class="eyebrow mb-4">{t.activity.eyebrow}</p>
+      <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.activity.title}</h2>
+      <p class="mx-auto max-w-2xl text-lg text-muted">{t.activity.subtitle}</p>
+    </div>
     <ul
       id="activity-feed"
       class="mx-auto grid max-w-3xl gap-3"
@@ -80,7 +83,7 @@ const t = getUi(lang);
           .map((e) => {
             const action = labels[e.type] ?? labels.other;
             const repo = e.repo.name.split("/")[1] ?? e.repo.name;
-            return `<li class="flex items-center gap-4 rounded-xl border border-border bg-card p-4">
+            return `<li class="flex items-center gap-4 rounded-xl border border-border bg-card p-4 transition-colors duration-200 hover:border-accent/50">
               <img src="${e.actor.avatar_url}&s=64" alt="" width="36" height="36" loading="lazy" class="h-9 w-9 shrink-0 rounded-full ring-1 ring-border" />
               <p class="min-w-0 flex-1 text-sm">
                 <span class="font-semibold">${esc(e.actor.display_login)}</span>

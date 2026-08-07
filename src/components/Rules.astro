@@ -9,13 +9,16 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="rules" class="reveal border-y border-border bg-bg-alt py-24">
+<section id="rules" class="reveal scroll-mt-20 border-y border-border bg-bg-alt py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.rules.title}</h2>
-    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">{t.rules.subtitle}</p>
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mb-12 text-center">
+      <p class="eyebrow mb-4">{t.rules.eyebrow}</p>
+      <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.rules.title}</h2>
+      <p class="mx-auto max-w-2xl text-lg text-muted">{t.rules.subtitle}</p>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {t.rules.items.map((r, i) => (
-        <article class="rounded-2xl border border-border bg-card p-7">
+        <article class="card-hover rounded-2xl border border-border bg-card p-6">
           <div class="mb-4 font-mono text-sm font-semibold text-accent-2">
             {String(i + 1).padStart(2, "0")}
           </div>

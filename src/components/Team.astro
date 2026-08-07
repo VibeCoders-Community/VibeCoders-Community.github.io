@@ -20,12 +20,15 @@ const members = teamData
   }));
 ---
 
-<section id="team" class="reveal border-y border-border bg-bg-alt py-24">
+<section id="team" class="reveal scroll-mt-20 border-y border-border bg-bg-alt py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.team.title}</h2>
-    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">{t.team.subtitle}</p>
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      <article class="rounded-2xl border border-accent/40 bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
+    <div class="mb-12 text-center">
+      <p class="eyebrow mb-4">{t.team.eyebrow}</p>
+      <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.team.title}</h2>
+      <p class="mx-auto max-w-2xl text-lg text-muted">{t.team.subtitle}</p>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="card-hover rounded-2xl border border-accent/40 bg-card p-6">
         <img
           src="https://github.com/DARKPIX404.png"
           alt="DARKPIX avatar"
@@ -44,7 +47,7 @@ const members = teamData
         <p class="text-sm text-muted">{t.team.owner.text}</p>
       </article>
       {members.map((m) => (
-        <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
+        <article class="card-hover rounded-2xl border border-border bg-card p-6">
           {m.avatar ? (
             <img
               src={m.avatar}
@@ -67,7 +70,7 @@ const members = teamData
         </article>
       ))}
       {t.team.roles.map((r) => (
-        <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
+        <article class="card-hover rounded-2xl border border-border bg-card p-6">
           <div class="mb-4 text-3xl">{r.icon}</div>
           <h3 class="mb-2 text-lg font-bold">{r.title}</h3>
           <p class="text-sm text-muted">{r.text}</p>
@@ -75,9 +78,9 @@ const members = teamData
       ))}
     </div>
     <h3 class="mt-16 mb-8 text-center text-2xl font-extrabold tracking-tight">{t.team.path.title}</h3>
-    <div class="grid gap-5 sm:grid-cols-3">
+    <div class="grid gap-6 sm:grid-cols-3">
       {t.team.path.steps.map((s) => (
-        <article class="rounded-2xl border border-border bg-card p-6 transition-all hover:-translate-y-1 hover:border-accent">
+        <article class="card-hover rounded-2xl border border-border bg-card p-6">
           <h4 class="mb-2 font-bold text-accent-2">{s.title}</h4>
           <p class="text-sm text-muted">{s.text}</p>
         </article>

@@ -30,6 +30,7 @@ export const ui = {
       },
     },
     about: {
+      eyebrow: "who we are",
       title: "What is VibeCoders?",
       subtitle:
         "A chill place for coders of any level — from first \"Hello, World\" to production systems. We believe learning is faster (and way more fun) together.",
@@ -52,6 +53,7 @@ export const ui = {
       ],
     },
     features: {
+      eyebrow: "features",
       title: "What's inside",
       items: [
         {
@@ -77,6 +79,7 @@ export const ui = {
       ],
     },
     chat: {
+      eyebrow: "support flow",
       title: "How tickets work",
       subtitle:
         "No noisy DMs, no lost messages. Here's the real support flow inside our Discord.",
@@ -103,6 +106,7 @@ export const ui = {
       },
     },
     rules: {
+      eyebrow: "ground rules",
       title: "Community rules",
       subtitle: "Six simple rules that keep the vibes good.",
       items: [
@@ -133,6 +137,7 @@ export const ui = {
       ],
     },
     faq: {
+      eyebrow: "good to know",
       title: "FAQ",
       subtitle: "Answers to the questions we hear most often.",
       items: [
@@ -159,6 +164,7 @@ export const ui = {
       ],
     },
     team: {
+      eyebrow: "the people",
       title: "The team",
       subtitle: "The people who keep the server running and the vibes good.",
       owner: {
@@ -214,6 +220,7 @@ export const ui = {
       ],
     },
     projects: {
+      eyebrow: "open source",
       title: "Open source",
       subtitle: "Everything we build for the community is public on GitHub.",
       cards: [
@@ -278,6 +285,7 @@ export const ui = {
       ],
     },
     activity: {
+      eyebrow: "live activity",
       title: "Live from GitHub",
       subtitle: "What the community is building right now.",
       error: "Couldn't load the activity feed — check the GitHub organization instead.",
@@ -290,6 +298,7 @@ export const ui = {
       other: "was active in",
     },
     join: {
+      eyebrow: "get started",
       title: "Ready to vibe?",
       subtitle: "Hop into the Discord, say hi, and open your first ticket. It takes a minute.",
       discord: "Join on Discord",
@@ -326,6 +335,7 @@ export const ui = {
       },
     },
     about: {
+      eyebrow: "кто мы",
       title: "Что такое VibeCoders?",
       subtitle:
         "Уютное место для кодеров любого уровня — от первого «Hello, World» до продакшн-систем. Мы верим, что вместе учиться быстрее (и намного веселее).",
@@ -348,6 +358,7 @@ export const ui = {
       ],
     },
     features: {
+      eyebrow: "возможности",
       title: "Что внутри",
       items: [
         {
@@ -373,6 +384,7 @@ export const ui = {
       ],
     },
     chat: {
+      eyebrow: "поддержка",
       title: "Как работают тикеты",
       subtitle:
         "Без шумных личек и потерянных сообщений. Вот реальный флоу поддержки в нашем Discord.",
@@ -399,6 +411,7 @@ export const ui = {
       },
     },
     rules: {
+      eyebrow: "правила",
       title: "Правила сообщества",
       subtitle: "Шесть простых правил, которые сохраняют хороший вайб.",
       items: [
@@ -429,6 +442,7 @@ export const ui = {
       ],
     },
     faq: {
+      eyebrow: "полезное",
       title: "FAQ",
       subtitle: "Ответы на вопросы, которые мы слышим чаще всего.",
       items: [
@@ -455,6 +469,7 @@ export const ui = {
       ],
     },
     team: {
+      eyebrow: "люди",
       title: "Команда",
       subtitle: "Люди, которые держат сервер в тонусе, а вайб — хорошим.",
       owner: {
@@ -510,6 +525,7 @@ export const ui = {
       ],
     },
     projects: {
+      eyebrow: "открытый код",
       title: "Открытый код",
       subtitle: "Всё, что мы создаём для сообщества, публично на GitHub.",
       cards: [
@@ -574,6 +590,7 @@ export const ui = {
       ],
     },
     activity: {
+      eyebrow: "активность",
       title: "Прямо из GitHub",
       subtitle: "Что сообщество пилит прямо сейчас.",
       error: "Не удалось загрузить ленту активности — загляни в GitHub-организацию.",
@@ -586,6 +603,7 @@ export const ui = {
       other: "проявил(а) активность в",
     },
     join: {
+      eyebrow: "начни здесь",
       title: "Готов к вайбу?",
       subtitle: "Залетай в Discord, поздоровайся и открой свой первый тикет. Это займёт минуту.",
       discord: "Вступить в Discord",

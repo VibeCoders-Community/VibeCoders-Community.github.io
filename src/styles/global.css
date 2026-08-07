@@ -6,7 +6,7 @@
   --color-card: #151a26;
   --color-border: #232b3d;
   --color-text: #e6e9f0;
-  --color-muted: #9aa4b8;
+  --color-muted: #a8b2c7;
   --color-accent: #7c5cff;
   --color-accent-2: #00d4ff;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
@@ -27,7 +27,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent-2);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -151,7 +151,113 @@ article:hover::before {
   background: var(--color-accent-2);
 }
 
+/* ---------- Section eyebrow labels (mono, above section titles) ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent-2);
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+}
+
+.eyebrow::after {
+  background: linear-gradient(90deg, var(--color-accent-2), var(--color-accent));
+}
+
+/* ---------- Nav link underline micro-interaction ---------- */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Card hover: lift + elevation by brightness (not shadows) ---------- */
+.card-hover {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--color-accent) 60%, var(--color-border));
+  background-color: color-mix(in srgb, var(--color-card), white 3%);
+}
+
+/* ---------- FAQ smooth expand ---------- */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+details[open] .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+/* ---------- Buttons: shared motion, press feedback ---------- */
+.btn-fx {
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.25s ease;
+}
+
+.btn-fx:active {
+  transform: scale(0.97);
+}
+
+.btn-ghost {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: color-mix(in srgb, var(--color-border), white 14%);
+}
+
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .spotlight::after,
   article::before {
     display: none;
@@ -159,5 +265,20 @@ article:hover::before {
 
   .fx-grid {
     display: none;
+  }
+
+  .nav-link,
+  .nav-link::after,
+  .card-hover,
+  .faq-answer,
+  .btn-fx,
+  .btn-ghost {
+    transition: none;
+  }
+
+  .card-hover:hover,
+  .btn-fx:active,
+  .btn-ghost:active {
+    transform: none;
   }
 }

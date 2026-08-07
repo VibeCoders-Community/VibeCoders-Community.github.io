@@ -9,15 +9,18 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="about" class="reveal py-24">
+<section id="about" class="reveal scroll-mt-20 py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.about.title}</h2>
-    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">
-      {t.about.subtitle}
-    </p>
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mb-12 text-center">
+      <p class="eyebrow mb-4">{t.about.eyebrow}</p>
+      <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.about.title}</h2>
+      <p class="mx-auto max-w-2xl text-lg text-muted">
+        {t.about.subtitle}
+      </p>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {t.about.cards.map((c) => (
-        <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
+        <article class="card-hover rounded-2xl border border-border bg-card p-6">
           <div class="mb-4 text-3xl">{c.icon}</div>
           <h3 class="mb-2 text-lg font-bold">{c.title}</h3>
           <p class="text-sm text-muted">{c.text}</p>

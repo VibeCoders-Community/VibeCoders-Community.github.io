@@ -12,8 +12,11 @@ const chat = t.chat;
 
 <section class="reveal py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{chat.title}</h2>
-    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">{chat.subtitle}</p>
+    <div class="mb-12 text-center">
+      <p class="eyebrow mb-4">{chat.eyebrow}</p>
+      <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{chat.title}</h2>
+      <p class="mx-auto max-w-2xl text-lg text-muted">{chat.subtitle}</p>
+    </div>
 
     <div class="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_48px_rgba(0,0,0,0.35)]">
       <div class="flex items-center gap-2 border-b border-border bg-bg-alt px-4 py-3">

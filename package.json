@@ -5,6 +5,7 @@
   "description": "VibeCoders community website",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/fetch_team.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },

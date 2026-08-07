@@ -10,6 +10,7 @@ const GUILD_ID = process.env.DISCORD_GUILD_ID || "1509571814983073912";
 const TEAM_ROLE_ID = process.env.TEAM_ROLE_ID || "1517639838805917787"; // TeamCommunity
 
 const DATA_FILE = new URL("../src/data/team.json", import.meta.url);
+const STATS_FILE = new URL("../src/data/stats.json", import.meta.url);
 const AVATAR_DIR = new URL("../public/team/", import.meta.url);
 
 if (!TOKEN) {
@@ -70,6 +71,17 @@ async function main() {
   const out = team.map(({ avatarUrl, ...m }) => m);
   await writeFile(DATA_FILE, JSON.stringify(out, null, 2) + "\n");
   console.log(`[fetch_team] wrote ${out.length} team members`);
+
+  // Real server stats for the hero counters.
+  try {
+    const guild = await api(`/guilds/${GUILD_ID}`, { with_counts: "true" });
+    const members = guild.approximate_member_count ?? out.length;
+    const online = guild.approximate_presence_count ?? null;
+    await writeFile(STATS_FILE, JSON.stringify({ members, online }, null, 2) + "\n");
+    console.log(`[fetch_team] stats: ${members} members, ${online} online`);
+  } catch (err) {
+    console.warn(`[fetch_team] stats fetch failed, keeping committed stats.json: ${err.message}`);
+  }
 }
 
 main().catch((err) => {

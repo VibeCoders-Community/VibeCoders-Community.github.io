@@ -22,6 +22,43 @@ body {
   color: var(--color-text);
 }
 
+::selection {
+  background: rgba(124, 92, 255, 0.35);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent-2);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
+
+/* Faded blueprint grid, used behind the hero */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 38%, black, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 38%, black, transparent 75%);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);

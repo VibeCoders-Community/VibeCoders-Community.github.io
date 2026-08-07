@@ -1,18 +1,34 @@
 ---
 import { GITHUB_ORG_URL } from "../config";
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#features", label: "Features" },
-  { href: "#projects", label: "Projects" },
-  { href: "#join", label: "Join" },
+  { href: "#about", label: t.nav.about },
+  { href: "#features", label: t.nav.features },
+  { href: "#projects", label: t.nav.projects },
+  { href: "#faq", label: t.nav.faq },
+  { href: "#team", label: t.nav.team },
+  { href: "#join", label: t.nav.join },
+];
+
+const langSwitch = [
+  { href: "/", label: "EN", active: lang === "en" },
+  { href: "/ru/", label: "RU", active: lang === "ru" },
 ];
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-bg/80 backdrop-blur-md">
   <div class="mx-auto flex h-16 max-w-5xl items-center gap-6 px-6">
-    <a href="#top" class="text-lg font-extrabold no-underline">
-      <span class="text-accent-2">⚡</span> VibeCoders
+    <a href="#top" class="flex items-center gap-2 text-lg font-extrabold no-underline">
+      <img src="/logo.svg" alt="VibeCoders logo" width="28" height="28" class="rounded-lg" />
+      VibeCoders
     </a>
     <nav id="nav-links" class="ml-auto hidden gap-6 md:flex">
       {links.map((l) => (
@@ -21,14 +37,24 @@ const links = [
         </a>
       ))}
     </nav>
+    <div class="flex items-center gap-1 rounded-lg border border-border bg-white/[0.02] p-1 font-mono text-xs">
+      {langSwitch.map((l) => (
+        <a
+          href={l.href}
+          class:list={[
+            "rounded-md px-2 py-1 no-underline transition-colors",
+            l.active ? "bg-accent text-white" : "text-muted hover:text-text",
+          ]}
+        >
+          {l.label}
+        </a>
+      ))}
+    </div>
     <a
       href={GITHUB_ORG_URL}
       target="_blank"
       rel="noopener"
-      class:list={[
-        "rounded-lg border border-border bg-white/[0.02] px-4 py-2 text-sm font-semibold no-underline transition-colors hover:bg-white/[0.06]",
-        "md:ml-0 ml-auto",
-      ]}
+      class="hidden rounded-lg border border-border bg-white/[0.02] px-4 py-2 text-sm font-semibold no-underline transition-colors hover:bg-white/[0.06] sm:block"
     >
       GitHub
     </a>
@@ -48,13 +74,16 @@ const links = [
 </header>
 
 <script>
-  const burger = document.getElementById("burger")!;
-  const menu = document.getElementById("mobile-menu")!;
-  burger.addEventListener("click", () => {
-    const open = menu.classList.toggle("hidden");
-    burger.setAttribute("aria-expanded", String(!open));
-  });
-  menu.querySelectorAll(".mobile-link").forEach((a) =>
-    a.addEventListener("click", () => menu.classList.add("hidden")),
-  );
+  const initNav = () => {
+    const burger = document.getElementById("burger")!;
+    const menu = document.getElementById("mobile-menu")!;
+    burger.addEventListener("click", () => {
+      const open = menu.classList.toggle("hidden");
+      burger.setAttribute("aria-expanded", String(!open));
+    });
+    menu.querySelectorAll(".mobile-link").forEach((a) =>
+      a.addEventListener("click", () => menu.classList.add("hidden")),
+    );
+  };
+  document.addEventListener("astro:page-load", initNav);
 </script>

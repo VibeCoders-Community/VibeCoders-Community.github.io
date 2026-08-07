@@ -1,15 +1,42 @@
 ---
 import { GITHUB_ORG } from "../config";
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
 ---
 
-<section id="projects" class="py-24">
+<section id="projects" class="reveal py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">Open source</h2>
+    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.projects.title}</h2>
     <p class="mx-auto mb-12 max-w-2xl text-center text-muted">
-      Everything we build for the community is public on GitHub.
+      {t.projects.subtitle}
     </p>
-    <div id="repo-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-org={GITHUB_ORG}>
-      <p class="col-span-full text-center text-sm text-muted">Loading projects…</p>
+    <div id="repo-grid" class="grid gap-5 sm:grid-cols-2" data-org={GITHUB_ORG}>
+      {t.projects.cards.map((c) => (
+        <article
+          class="rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent"
+          data-repo={c.repo}
+        >
+          <a
+            href={`https://github.com/${GITHUB_ORG}/${c.repo}`}
+            target="_blank"
+            rel="noopener"
+            class="block p-7 no-underline"
+          >
+            <h3 class="mb-2 text-lg font-bold">{c.name}</h3>
+            <p class="text-sm text-muted">{c.description}</p>
+            <div class="mt-4 flex gap-4 font-mono text-xs text-muted">
+              <span data-repo-language></span>
+              <span data-repo-stars></span>
+            </div>
+          </a>
+        </article>
+      ))}
     </div>
   </div>
 </section>
@@ -17,49 +44,35 @@ import { GITHUB_ORG } from "../config";
 <script>
   interface Repo {
     name: string;
-    description: string | null;
-    html_url: string;
     language: string | null;
     stargazers_count: number;
-    fork: boolean;
   }
 
-  const grid = document.getElementById("repo-grid")!;
-  const org = grid.dataset.org!;
-  const esc = (s: string) =>
-    s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+  const initRepos = async () => {
+    const grid = document.getElementById("repo-grid");
+    if (!grid) return;
+    const org = grid.dataset.org!;
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
-  async function loadRepos() {
     try {
-      const res = await fetch(`https://api.github.com/orgs/${org}/repos?per_page=6&sort=updated`);
+      const res = await fetch(`https://api.github.com/orgs/${org}/repos?per_page=100`);
       if (!res.ok) throw new Error(`GitHub API ${res.status}`);
-      const repos = ((await res.json()) as Repo[]).filter((r) => !r.fork && r.name !== ".github");
-      if (!repos.length) throw new Error("no repos");
+      const repos = (await res.json()) as Repo[];
 
-      grid.innerHTML = repos
-        .map(
-          (r) => `
-        <article class="rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent">
-          <a href="${r.html_url}" target="_blank" rel="noopener" class="block p-7 no-underline">
-            <h3 class="mb-2 text-lg font-bold">${esc(r.name)}</h3>
-            <p class="text-sm text-muted">${esc(r.description ?? "Community project.")}</p>
-            <div class="mt-4 flex gap-4 font-mono text-xs text-muted">
-              ${r.language ? `<span>● ${esc(r.language)}</span>` : ""}
-              <span>★ ${r.stargazers_count}</span>
-            </div>
-          </a>
-        </article>`,
-        )
-        .join("");
+      grid.querySelectorAll<HTMLElement>("[data-repo]").forEach((card) => {
+        const repo = repos.find((r) => r.name === card.dataset.repo);
+        if (!repo) return;
+        const langEl = card.querySelector<HTMLElement>("[data-repo-language]");
+        const starsEl = card.querySelector<HTMLElement>("[data-repo-stars]");
+        if (langEl && repo.language) langEl.innerHTML = `● ${esc(repo.language)}`;
+        if (starsEl) starsEl.textContent = `★ ${repo.stargazers_count}`;
+      });
     } catch {
-      grid.innerHTML = `
-        <article class="rounded-2xl border border-border bg-card sm:col-span-2 lg:col-span-3">
-          <a href="https://github.com/${org}" target="_blank" rel="noopener" class="block p-7 no-underline">
-            <h3 class="mb-2 text-lg font-bold">Our projects on GitHub</h3>
-            <p class="text-sm text-muted">Browse the ${org} organization repositories.</p>
-          </a>
-        </article>`;
+      /* static cards stay as the fallback */
     }
-  }
-  loadRepos();
+  };
+  document.addEventListener("astro:page-load", () => {
+    void initRepos();
+  });
 </script>

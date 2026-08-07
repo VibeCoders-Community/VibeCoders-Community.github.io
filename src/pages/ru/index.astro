@@ -1,0 +1,34 @@
+---
+import Base from "../../layouts/Base.astro";
+import Nav from "../../components/Nav.astro";
+import Hero from "../../components/Hero.astro";
+import About from "../../components/About.astro";
+import Features from "../../components/Features.astro";
+import ChatPreview from "../../components/ChatPreview.astro";
+import Rules from "../../components/Rules.astro";
+import Projects from "../../components/Projects.astro";
+import Faq from "../../components/Faq.astro";
+import Team from "../../components/Team.astro";
+import Join from "../../components/Join.astro";
+import Footer from "../../components/Footer.astro";
+import { getUi } from "../../i18n";
+
+const lang = "ru";
+const t = getUi(lang);
+---
+
+<Base title={t.meta.title} description={t.meta.description} lang={lang}>
+  <Nav lang={lang} />
+  <main id="top">
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Features lang={lang} />
+    <ChatPreview lang={lang} />
+    <Rules lang={lang} />
+    <Projects lang={lang} />
+    <Faq lang={lang} />
+    <Team lang={lang} />
+    <Join lang={lang} />
+  </main>
+  <Footer />
+</Base>

@@ -1,0 +1,44 @@
+---
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
+---
+
+<section id="team" class="reveal border-y border-border bg-bg-alt py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.team.title}</h2>
+    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">{t.team.subtitle}</p>
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <article class="rounded-2xl border border-accent/40 bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
+        <img
+          src="https://github.com/DARKPIX404.png"
+          alt="DARKPIX avatar"
+          width="64"
+          height="64"
+          loading="lazy"
+          class="mb-4 h-16 w-16 rounded-full ring-2 ring-accent/50"
+        />
+        <h3 class="text-lg font-bold">
+          DARKPIX
+          <span class="ml-1 text-sm font-normal text-muted">(Vladislav Borodatyy)</span>
+        </h3>
+        <p class="mb-2 font-mono text-xs font-semibold tracking-wider text-accent-2 uppercase">
+          {t.team.owner.role}
+        </p>
+        <p class="text-sm text-muted">{t.team.owner.text}</p>
+      </article>
+      {t.team.roles.map((r) => (
+        <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
+          <div class="mb-4 text-3xl">{r.icon}</div>
+          <h3 class="mb-2 text-lg font-bold">{r.title}</h3>
+          <p class="text-sm text-muted">{r.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

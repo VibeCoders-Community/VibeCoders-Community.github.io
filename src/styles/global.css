@@ -226,6 +226,11 @@ details[open] .faq-answer {
   grid-template-rows: 1fr;
 }
 
+/* JS-driven symmetric close: wins over details[open] while .faq-closing is set */
+details[open].faq-closing .faq-answer {
+  grid-template-rows: 0fr;
+}
+
 /* ---------- Buttons: shared motion, press feedback ---------- */
 .btn-fx {
   transition:
@@ -253,6 +258,224 @@ details[open] .faq-answer {
   transform: scale(0.97);
 }
 
+/* ---------- Sheen sweep on primary buttons (sits under the pixel-cube grid) ---------- */
+.btn-fx::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -70%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.btn-fx:hover::before {
+  left: 130%;
+}
+
+/* ---------- Scroll progress bar ---------- */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  z-index: 60;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* ---------- Entrance choreography (hero, feed items, chat messages) ---------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise, 20px));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in {
+  animation: fade-up 0.6s ease both;
+  animation-delay: var(--hd, 0ms);
+}
+
+.activity-item {
+  animation: fade-up 0.45s ease both;
+}
+
+.pixie-msg {
+  --rise: 8px;
+  animation: fade-up 0.3s ease both;
+}
+
+/* ---------- Living accent gradient in the hero title ---------- */
+.hero-accent {
+  background-size: 220% 220%;
+  animation: gradient-pan 9s ease-in-out infinite;
+}
+
+@keyframes gradient-pan {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ---------- Slow drift of the hero glow backdrop ---------- */
+.hero-glow {
+  animation: hero-glow 12s ease-in-out infinite alternate;
+}
+
+@keyframes hero-glow {
+  from {
+    opacity: 0.8;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-16px) scale(1.05);
+  }
+}
+
+/* ---------- Staggered card reveal (opacity-only: no conflict with .card-hover) ---------- */
+.reveal-stagger > * {
+  opacity: 0;
+}
+
+.reveal-stagger.is-visible > * {
+  animation: stagger-fade 0.5s ease forwards;
+}
+
+@keyframes stagger-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.reveal-stagger.is-visible > *:nth-child(2) { animation-delay: 50ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { animation-delay: 100ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { animation-delay: 150ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { animation-delay: 200ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { animation-delay: 250ms; }
+.reveal-stagger.is-visible > *:nth-child(7) { animation-delay: 300ms; }
+.reveal-stagger.is-visible > *:nth-child(8) { animation-delay: 350ms; }
+.reveal-stagger.is-visible > *:nth-child(9) { animation-delay: 400ms; }
+
+/* ---------- Scrollspy: active nav link ---------- */
+.nav-link.is-active {
+  color: var(--color-text);
+}
+
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ---------- Skeleton shimmer (activity feed) ---------- */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ---------- Online status dot (PixieChat header) ---------- */
+.status-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #3dd68c;
+}
+
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  border: 2px solid rgba(61, 214, 140, 0.5);
+  animation: status-ping 2s ease-out infinite;
+}
+
+@keyframes status-ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  80%,
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* ---------- Back to top ---------- */
+#back-to-top {
+  position: fixed;
+  right: 5.75rem;
+  bottom: 1.875rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-text);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.2s ease;
+}
+
+#back-to-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+#back-to-top:hover {
+  border-color: var(--color-accent);
+}
+
+@media (max-width: 480px) {
+  #back-to-top {
+    right: 5.5rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -263,7 +486,8 @@ details[open] .faq-answer {
     display: none;
   }
 
-  .fx-grid {
+  .fx-grid,
+  .btn-fx::before {
     display: none;
   }
 
@@ -272,7 +496,8 @@ details[open] .faq-answer {
   .card-hover,
   .faq-answer,
   .btn-fx,
-  .btn-ghost {
+  .btn-ghost,
+  #back-to-top {
     transition: none;
   }
 
@@ -280,5 +505,23 @@ details[open] .faq-answer {
   .btn-fx:active,
   .btn-ghost:active {
     transform: none;
+  }
+
+  .hero-in,
+  .activity-item,
+  .pixie-msg,
+  .hero-accent,
+  .hero-glow,
+  .skeleton,
+  .status-dot::after {
+    animation: none;
+  }
+
+  .reveal-stagger > * {
+    opacity: 1;
+  }
+
+  .reveal-stagger.is-visible > * {
+    animation: none;
   }
 }

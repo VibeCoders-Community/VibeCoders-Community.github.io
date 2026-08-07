@@ -15,6 +15,9 @@ export const ui = {
       team: "Team",
       join: "Join",
     },
+    a11y: {
+      backToTop: "Back to top",
+    },
     hero: {
       badge: "⚡ developer community",
       titleStart: "Code with",
@@ -249,6 +252,7 @@ export const ui = {
     pixieChat: {
       open: "Chat with Pixie",
       title: "Pixie",
+      status: "online",
       demoBadge: "scripted demo",
       greeting:
         "Hey! I'm Pixie ⚡ — the community bot. Ask me about tickets, translation, the team or how to join. Heads up: this is a scripted demo — the real me lives in our Discord.",
@@ -319,6 +323,9 @@ export const ui = {
       faq: "FAQ",
       team: "Команда",
       join: "Вступить",
+    },
+    a11y: {
+      backToTop: "Наверх",
     },
     hero: {
       badge: "⚡ сообщество разработчиков",
@@ -554,6 +561,7 @@ export const ui = {
     pixieChat: {
       open: "Чат с Pixie",
       title: "Pixie",
+      status: "в сети",
       demoBadge: "скриптовое демо",
       greeting:
         "Привет! Я Pixie ⚡ — бот сообщества. Спроси меня про тикеты, перевод, команду или как вступить. Учти: это скриптовое демо — настоящая я живу в нашем Discord.",

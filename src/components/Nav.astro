@@ -84,6 +84,29 @@ const langSwitch = [
     menu.querySelectorAll(".mobile-link").forEach((a) =>
       a.addEventListener("click", () => menu.classList.add("hidden")),
     );
+
+    // Scrollspy: highlight the nav link of the section in view.
+    const w = window as unknown as { __navSpy?: IntersectionObserver };
+    w.__navSpy?.disconnect();
+    const spyLinks = Array.from(
+      document.querySelectorAll<HTMLAnchorElement>("#nav-links a[href^='#']"),
+    );
+    const sections = spyLinks
+      .map((a) => document.querySelector<HTMLElement>(a.hash))
+      .filter((s): s is HTMLElement => s !== null);
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          spyLinks.forEach((a) =>
+            a.classList.toggle("is-active", a.hash === `#${en.target.id}`),
+          );
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((s) => spy.observe(s));
+    w.__navSpy = spy;
   };
   document.addEventListener("astro:page-load", initNav);
 </script>

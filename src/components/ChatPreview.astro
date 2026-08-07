@@ -1,0 +1,91 @@
+---
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
+const chat = t.chat;
+---
+
+<section class="reveal py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{chat.title}</h2>
+    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">{chat.subtitle}</p>
+
+    <div class="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_48px_rgba(0,0,0,0.35)]">
+      <div class="flex items-center gap-2 border-b border-border bg-bg-alt px-4 py-3">
+        <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+        <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+        <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+        <span class="ml-3 font-mono text-xs text-muted">VibeCoders · Discord</span>
+      </div>
+      <div class="grid sm:grid-cols-[220px_1fr]">
+        <aside class="hidden border-r border-border bg-bg-alt p-4 sm:block">
+          <p class="mb-2 px-2 font-mono text-[11px] font-semibold tracking-wider text-muted uppercase">
+            {chat.channelsLabel}
+          </p>
+          <ul class="grid gap-0.5">
+            {chat.channels.map((ch) => (
+              <li
+                class:list={[
+                  "rounded-md px-2 py-1.5 font-mono text-sm",
+                  ch.startsWith("ticket-")
+                    ? "bg-accent/15 text-accent-2"
+                    : "text-muted",
+                ]}
+              >
+                # {ch}
+              </li>
+            ))}
+          </ul>
+        </aside>
+        <div class="grid gap-5 p-5">
+          <div class="flex gap-3">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-lg">⚡</div>
+            <div>
+              <p class="text-sm">
+                <span class="font-semibold text-accent-2">{chat.panel.author}</span>
+                <span class="ml-1 rounded bg-accent px-1.5 py-0.5 font-mono text-[10px] font-semibold text-white">BOT</span>
+                <span class="ml-2 text-xs text-muted">{chat.panel.time}</span>
+              </p>
+              <p class="mt-1 max-w-lg text-sm text-muted">{chat.panel.text}</p>
+              <button class="mt-3 cursor-default rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white">
+                {chat.panel.button}
+              </button>
+            </div>
+          </div>
+
+          <div class="mx-auto w-full max-w-md rounded-2xl border border-border bg-bg-alt p-5">
+            <p class="mb-3 font-bold">{chat.modal.title}</p>
+            <label class="mb-1 block font-mono text-[11px] font-semibold tracking-wider text-muted uppercase">
+              {chat.modal.field}
+            </label>
+            <div class="rounded-lg border border-border bg-card px-3 py-2 text-sm">{chat.modal.value}</div>
+            <div class="mt-4 flex justify-end gap-2">
+              <span class="rounded-lg px-4 py-2 text-sm text-muted">{chat.modal.cancel}</span>
+              <span class="rounded-lg bg-gradient-to-br from-accent to-accent-2 px-4 py-2 text-sm font-semibold text-white">
+                {chat.modal.submit}
+              </span>
+            </div>
+          </div>
+
+          <p class="text-center font-mono text-xs text-accent-2">{chat.created}</p>
+
+          <div class="flex gap-3">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-card text-lg ring-1 ring-border">🔨</div>
+            <div>
+              <p class="text-sm">
+                <span class="font-semibold text-text">{chat.reply.author}</span>
+                <span class="ml-2 text-xs text-muted">{chat.reply.time}</span>
+              </p>
+              <p class="mt-1 max-w-lg text-sm text-muted">{chat.reply.text}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

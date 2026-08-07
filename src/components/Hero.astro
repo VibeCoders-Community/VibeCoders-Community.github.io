@@ -1,4 +1,12 @@
 ---
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
 ---
 
 <section class="relative overflow-hidden py-28 text-center md:py-36">
@@ -8,41 +16,40 @@
   ></div>
   <div class="relative mx-auto max-w-5xl px-6">
     <p class="mb-6 inline-block rounded-full border border-border bg-bg-alt px-4 py-1.5 font-mono text-sm text-accent-2">
-      ⚡ developer community
+      {t.hero.badge}
     </p>
     <h1 class="mb-5 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl">
-      Code with <span class="bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">good vibes</span>
+      {t.hero.titleStart} <span class="bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">{t.hero.titleAccent}</span>
     </h1>
     <p class="mx-auto mb-9 max-w-xl text-lg text-muted">
-      VibeCoders is a friendly Discord community of developers who build, learn and ship together.
-      Ask questions, share projects, find teammates.
+      {t.hero.subtitle}
     </p>
     <div class="flex flex-wrap justify-center gap-4">
       <a
         href="#join"
         class="rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline transition-shadow hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
       >
-        Join the community
+        {t.hero.ctaJoin}
       </a>
       <a
         href="#projects"
         class="rounded-xl border border-border bg-white/[0.02] px-7 py-3.5 font-semibold no-underline transition-colors hover:bg-white/[0.06]"
       >
-        See our projects
+        {t.hero.ctaProjects}
       </a>
     </div>
     <div class="mt-16 flex flex-wrap justify-center gap-12">
       <div>
-        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="100" data-suffix="+">0</span>
-        <span class="text-sm text-muted">members</span>
+        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="100" data-suffix="+" data-live-members>0</span>
+        <span class="text-sm text-muted">{t.hero.stats.members}</span>
       </div>
       <div>
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="24" data-suffix="/7">0</span>
-        <span class="text-sm text-muted">support</span>
+        <span class="text-sm text-muted">{t.hero.stats.support}</span>
       </div>
       <div>
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="0" data-suffix="">0</span>
-        <span class="text-sm text-muted">toxicity</span>
+        <span class="text-sm text-muted">{t.hero.stats.toxicity}</span>
       </div>
     </div>
   </div>
@@ -52,6 +59,10 @@
   const animate = (el: HTMLElement) => {
     const target = Number(el.dataset.count ?? 0);
     const suffix = el.dataset.suffix ?? "";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.textContent = String(target) + suffix;
+      return;
+    }
     const dur = 900;
     const t0 = performance.now();
     const tick = (t: number) => {
@@ -61,16 +72,37 @@
     };
     requestAnimationFrame(tick);
   };
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          animate(e.target as HTMLElement);
-          io.unobserve(e.target);
-        }
-      });
-    },
-    { threshold: 0.6 },
-  );
-  document.querySelectorAll<HTMLElement>("[data-count]").forEach((c) => io.observe(c));
+
+  const initCounters = async () => {
+    const counters = document.querySelectorAll<HTMLElement>("[data-count]");
+    if (!counters.length) return;
+
+    const membersEl = document.querySelector<HTMLElement>("[data-live-members]");
+    try {
+      const res = await fetch("https://discord.com/api/v9/invites/vibecoders?with_counts=true");
+      if (!res.ok) throw new Error(`Discord API ${res.status}`);
+      const data = (await res.json()) as { approximate_member_count?: number };
+      if (membersEl && typeof data.approximate_member_count === "number") {
+        membersEl.dataset.count = String(data.approximate_member_count);
+      }
+    } catch {
+      /* keep the static fallback */
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            animate(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.6 },
+    );
+    counters.forEach((c) => io.observe(c));
+  };
+  document.addEventListener("astro:page-load", () => {
+    void initCounters();
+  });
 </script>

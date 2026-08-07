@@ -1,32 +1,22 @@
 ---
-const cards = [
-  {
-    icon: "💬",
-    title: "Real help, fast",
-    text: "Stuck on a bug? Drop it in the help channels or open a support ticket — the community and our bot Pixie have your back.",
-  },
-  {
-    icon: "🚀",
-    title: "Ship projects",
-    text: "Showcase your work, get honest feedback, find collaborators for your next side project or game server.",
-  },
-  {
-    icon: "🌍",
-    title: "Open for everyone",
-    text: "Any language, any stack, any timezone. Russian and English speakers welcome — our translator bot smooths the rest.",
-  },
-];
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
 ---
 
-<section id="about" class="py-24">
+<section id="about" class="reveal py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">What is VibeCoders?</h2>
+    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.about.title}</h2>
     <p class="mx-auto mb-12 max-w-2xl text-center text-muted">
-      A chill place for coders of any level — from first "Hello, World" to production systems.
-      We believe learning is faster (and way more fun) together.
+      {t.about.subtitle}
     </p>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {cards.map((c) => (
+      {t.about.cards.map((c) => (
         <article class="rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-accent">
           <div class="mb-4 text-3xl">{c.icon}</div>
           <h3 class="mb-2 text-lg font-bold">{c.title}</h3>

@@ -1,33 +1,19 @@
 ---
-const features = [
-  {
-    tag: "🎫",
-    title: "Ticket support system",
-    text: "Private support channels for tech help, community questions, projects and reports — handled by moderators with full transcripts.",
-  },
-  {
-    tag: "🤖",
-    title: "Pixie, our community bot",
-    text: "Custom-built moderation, welcome flows and instant translation between Russian and English channels.",
-  },
-  {
-    tag: "🛠️",
-    title: "Build channels",
-    text: "Web, bots, Minecraft servers, DevOps — pick your corner or start a new one.",
-  },
-  {
-    tag: "🎉",
-    title: "Events & collabs",
-    text: "Code reviews, game nights and community projects run by the members themselves.",
-  },
-];
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
 ---
 
-<section id="features" class="border-y border-border bg-bg-alt py-24">
+<section id="features" class="reveal border-y border-border bg-bg-alt py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <h2 class="mb-12 text-center text-3xl font-extrabold tracking-tight md:text-4xl">What's inside</h2>
+    <h2 class="mb-12 text-center text-3xl font-extrabold tracking-tight md:text-4xl">{t.features.title}</h2>
     <ul class="mx-auto grid max-w-3xl gap-4">
-      {features.map((f) => (
+      {t.features.items.map((f) => (
         <li class="flex gap-5 rounded-2xl border border-border bg-card p-6">
           <span class="text-2xl">{f.tag}</span>
           <div>

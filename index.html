@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VibeCoders — Code with good vibes</title>
+  <meta name="description" content="VibeCoders is a friendly developer community on Discord. Share projects, get help, and build together." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="nav__logo" href="#top">
+        <span class="nav__logo-mark">⚡</span> VibeCoders
+      </a>
+      <nav class="nav__links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#projects">Projects</a>
+        <a href="#join">Join</a>
+      </nav>
+      <a class="btn btn--ghost nav__gh" href="https://github.com/VibeCoders-Community" target="_blank" rel="noopener">GitHub</a>
+      <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <p class="hero__badge">⚡ developer community</p>
+        <h1 class="hero__title">Code with <span class="grad">good vibes</span></h1>
+        <p class="hero__sub">
+          VibeCoders is a friendly Discord community of developers who build,
+          learn and ship together. Ask questions, share projects, find teammates.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#join">Join the community</a>
+          <a class="btn btn--ghost" href="#projects">See our projects</a>
+        </div>
+        <div class="hero__stats">
+          <div class="stat"><span class="stat__num" data-count="100">0</span><span class="stat__label">members</span></div>
+          <div class="stat"><span class="stat__num" data-count="24">0</span><span class="stat__label">/7 support</span></div>
+          <div class="stat"><span class="stat__num" data-count="0">0</span><span class="stat__label">toxicity</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section__title">What is VibeCoders?</h2>
+        <p class="section__lead">
+          A chill place for coders of any level — from first "Hello, World" to production systems.
+          We believe learning is faster (and way more fun) together.
+        </p>
+        <div class="cards">
+          <article class="card">
+            <div class="card__icon">💬</div>
+            <h3>Real help, fast</h3>
+            <p>Stuck on a bug? Drop it in the help channels or open a support ticket — the community and our bot Pixie have your back.</p>
+          </article>
+          <article class="card">
+            <div class="card__icon">🚀</div>
+            <h3>Ship projects</h3>
+            <p>Showcase your work, get honest feedback, find collaborators for your next side project or game server.</p>
+          </article>
+          <article class="card">
+            <div class="card__icon">🌍</div>
+            <h3>Open for everyone</h3>
+            <p>Any language, any stack, any timezone. Russian and English speakers welcome — our translator bot smooths the rest.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="features">
+      <div class="container">
+        <h2 class="section__title">What's inside</h2>
+        <ul class="features">
+          <li class="feature">
+            <span class="feature__tag">🎫</span>
+            <div>
+              <h3>Ticket support system</h3>
+              <p>Private support channels for tech help, community questions, projects and reports — handled by moderators with full transcripts.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="feature__tag">🤖</span>
+            <div>
+              <h3>Pixie, our community bot</h3>
+              <p>Custom-built moderation, welcome flows and instant translation between Russian and English channels.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="feature__tag">🛠️</span>
+            <div>
+              <h3>Build channels</h3>
+              <p>Web, bots, Minecraft servers, DevOps — pick your corner or start a new one.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <span class="feature__tag">🎉</span>
+            <div>
+              <h3>Events &amp; collabs</h3>
+              <p>Code reviews, game nights and community projects run by the members themselves.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section__title">Open source</h2>
+        <p class="section__lead">Everything we build for the community is public on GitHub.</p>
+        <div class="cards cards--projects" id="repoCards">
+          <noscript>
+            <p>See our projects on <a href="https://github.com/VibeCoders-Community">GitHub</a>.</p>
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="join">
+      <div class="container join">
+        <h2 class="section__title">Ready to vibe?</h2>
+        <p class="section__lead">Hop into the Discord, say hi, and open your first ticket. It takes a minute.</p>
+        <div class="join__cta">
+          <a class="btn btn--primary btn--lg" id="discordInvite" href="https://github.com/VibeCoders-Community" target="_blank" rel="noopener">Join on Discord</a>
+          <a class="btn btn--ghost btn--lg" href="https://github.com/VibeCoders-Community" target="_blank" rel="noopener">GitHub organization</a>
+        </div>
+        <p class="join__note">Be kind. No spam, no toxicity — just code and good vibes.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>© <span id="year"></span> VibeCoders Community</span>
+      <span class="footer__made">Built with ⚡ by the community</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

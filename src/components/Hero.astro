@@ -1,5 +1,6 @@
 ---
 import { getUi, type Lang } from "../i18n";
+import stats from "../data/stats.json";
 
 interface Props {
   lang: Lang;
@@ -14,6 +15,7 @@ const t = getUi(lang);
     class="pointer-events-none absolute inset-x-0 -top-48 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.35),transparent_70%),radial-gradient(closest-side,rgba(0,212,255,0.18),transparent_70%)] bg-[position:30%_50%,70%_40%] bg-no-repeat"
     aria-hidden="true"
   ></div>
+  <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
   <div class="relative mx-auto max-w-5xl px-6">
     <p class="mb-6 inline-block rounded-full border border-border bg-bg-alt px-4 py-1.5 font-mono text-sm text-accent-2">
       {t.hero.badge}
@@ -38,16 +40,16 @@ const t = getUi(lang);
         {t.hero.ctaProjects}
       </a>
     </div>
-    <div class="mt-16 flex flex-wrap justify-center gap-12">
-      <div>
-        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="100" data-suffix="+" data-live-members>0</span>
+    <div class="mt-16 flex flex-wrap justify-center gap-5">
+      <div class="rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm">
+        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count={stats.members} data-suffix="" data-live-members>0</span>
         <span class="text-sm text-muted">{t.hero.stats.members}</span>
       </div>
-      <div>
+      <div class="rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="24" data-suffix="/7">0</span>
         <span class="text-sm text-muted">{t.hero.stats.support}</span>
       </div>
-      <div>
+      <div class="rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="0" data-suffix="">0</span>
         <span class="text-sm text-muted">{t.hero.stats.toxicity}</span>
       </div>

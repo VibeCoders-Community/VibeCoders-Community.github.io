@@ -20,9 +20,9 @@ const t = getUi(lang);
 
 <div
   id="pixie-panel"
-  class="fixed right-6 bottom-24 z-50 hidden w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl border border-border bg-bg-alt shadow-2xl"
+  class="glass fixed right-6 bottom-24 z-50 hidden w-[min(92vw,380px)] flex-col overflow-hidden rounded-2xl shadow-2xl"
 >
-  <div class="flex items-center gap-3 border-b border-border bg-card px-4 py-3">
+  <div class="flex items-center gap-3 border-b border-white/[0.07] bg-white/[0.03] px-4 py-3">
     <img src="/logo.svg" alt="" width="28" height="28" class="rounded-full" />
     <div class="mr-auto">
       <p class="flex items-center gap-2 text-sm font-bold">
@@ -35,13 +35,13 @@ const t = getUi(lang);
     <button id="pixie-close" class="cursor-pointer border-0 bg-transparent p-1 text-lg text-muted hover:text-text" aria-label="Close">✕</button>
   </div>
   <div id="pixie-messages" class="flex h-72 flex-col gap-2 overflow-y-auto p-4"></div>
-  <form id="pixie-form" class="flex gap-2 border-t border-border p-3">
+  <form id="pixie-form" class="flex gap-2 border-t border-white/[0.07] p-3">
     <input
       id="pixie-input"
       type="text"
       placeholder={t.pixieChat.placeholder}
       autocomplete="off"
-      class="min-w-0 flex-1 rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text outline-none placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/40"
+      class="min-w-0 flex-1 rounded-lg border border-white/10 bg-black/30 px-3 py-2 text-sm text-text outline-none placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/40"
     />
     <button
       type="submit"
@@ -72,7 +72,7 @@ const t = getUi(lang);
       el.className =
         from === "user"
           ? "pixie-msg ml-8 self-end rounded-xl rounded-br-sm bg-gradient-to-br from-accent to-accent-2 px-3 py-2 text-sm text-white"
-          : "pixie-msg mr-8 self-start rounded-xl rounded-bl-sm bg-card px-3 py-2 text-sm text-text";
+          : "pixie-msg mr-8 self-start rounded-xl rounded-bl-sm border border-white/[0.07] bg-white/[0.06] px-3 py-2 text-sm text-text";
       messages.appendChild(el);
       scroll();
       return el;

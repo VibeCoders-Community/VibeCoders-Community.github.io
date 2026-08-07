@@ -3,9 +3,9 @@ export type Lang = "en" | "ru";
 export const ui = {
   en: {
     meta: {
-      title: "VibeCoders — Code with good vibes",
+      title: "VibeCoders — AI vibe coding community",
       description:
-        "VibeCoders is a friendly developer community on Discord. Share projects, get help, and build together.",
+        "VibeCoders is a friendly AI vibe coding community on Discord. Build with AI agents, share projects, and ship together.",
     },
     nav: {
       about: "About",
@@ -19,13 +19,26 @@ export const ui = {
       backToTop: "Back to top",
     },
     hero: {
-      badge: "⚡ developer community",
-      titleStart: "Code with",
-      titleAccent: "good vibes",
+      badge: "⚡ AI vibe coding community",
+      titleStart: "Vibe code with",
+      titleAccent: "AI.",
+      titleEnd: "Ship together.",
       subtitle:
-        "VibeCoders is a friendly Discord community of developers who build, learn and ship together. Ask questions, share projects, find teammates.",
+        "VibeCoders is a friendly Discord community of developers who build with AI agents, learn and ship together. Ask questions, share projects, find teammates.",
       ctaJoin: "Join the community",
       ctaProjects: "See our projects",
+      terminal: {
+        title: "vibe — zsh",
+        lines: [
+          { t: "cmd", x: "pixie create app" },
+          { t: "out", x: "◆ AI generating components…" },
+          { t: "code", x: "const app = await pixie.generate('landing')" },
+          { t: "ok", x: "✓ done in 4.2s" },
+          { t: "cmd", x: "git push origin main" },
+          { t: "out", x: "◆ Deploying to production…" },
+          { t: "ok", x: "✓ live at vibecoders.community" },
+        ],
+      },
       stats: {
         members: "members",
         support: "support",
@@ -36,17 +49,17 @@ export const ui = {
       eyebrow: "who we are",
       title: "What is VibeCoders?",
       subtitle:
-        "A chill place for coders of any level — from first \"Hello, World\" to production systems. We believe learning is faster (and way more fun) together.",
+        "A chill place for coders of any level — from first \"Hello, World\" to AI-assisted production systems. We believe building with AI is faster (and way more fun) together.",
       cards: [
         {
           icon: "💬",
           title: "Real help, fast",
-          text: "Stuck on a bug? Drop it in the help channels or open a support ticket — the community and our bot Pixie have your back.",
+          text: "Stuck on a bug? Drop it in the help channels or open a support ticket — the community and our AI bot Pixie have your back.",
         },
         {
           icon: "🚀",
           title: "Ship projects",
-          text: "Showcase your work, get honest feedback, find collaborators for your next side project or game server.",
+          text: "Showcase your AI-built work, get honest feedback, find collaborators for your next side project or game server.",
         },
         {
           icon: "🌍",
@@ -66,8 +79,8 @@ export const ui = {
         },
         {
           tag: "🤖",
-          title: "Pixie, our community bot",
-          text: "Custom-built moderation, welcome flows and on-demand translation: right-click any message → Apps → Pixie → Translate.",
+          title: "Pixie, our AI bot",
+          text: "Custom-built AI assistance, moderation, welcome flows and on-demand translation: right-click any message → Apps → Pixie → Translate.",
         },
         {
           tag: "🛠️",
@@ -172,7 +185,7 @@ export const ui = {
       subtitle: "The people who keep the server running and the vibes good.",
       owner: {
         role: "Owner & Founder",
-        text: "Builds the community infrastructure: bots, ticket system, automation and this website.",
+        text: "Builds the community infrastructure: AI bots, ticket system, automation and this website.",
       },
       defaultMember: {
         role: "Team member",
@@ -255,7 +268,7 @@ export const ui = {
       status: "online",
       demoBadge: "scripted demo",
       greeting:
-        "Hey! I'm Pixie ⚡ — the community bot. Ask me about tickets, translation, the team or how to join. Heads up: this is a scripted demo — the real me lives in our Discord.",
+        "Hey! I'm Pixie ⚡ — the community's AI bot. Ask me about tickets, translation, the team or how to join. Heads up: this is a scripted demo — the real me lives in our Discord.",
       placeholder: "Ask Pixie something…",
       send: "Send",
       typing: "Pixie is typing…",
@@ -304,7 +317,7 @@ export const ui = {
     join: {
       eyebrow: "get started",
       title: "Ready to vibe?",
-      subtitle: "Hop into the Discord, say hi, and open your first ticket. It takes a minute.",
+      subtitle: "Hop into the Discord, say hi, and ship your first AI-built project with us. It takes a minute.",
       discord: "Join on Discord",
       github: "GitHub organization",
       note: "Be kind. No spam, no toxicity — just code and good vibes.",
@@ -312,9 +325,9 @@ export const ui = {
   },
   ru: {
     meta: {
-      title: "VibeCoders — Кодь с хорошим вайбом",
+      title: "VibeCoders — сообщество AI-вайб-кодинга",
       description:
-        "VibeCoders — дружелюбное сообщество разработчиков в Discord. Делись проектами, получай помощь и создавай вместе с нами.",
+        "VibeCoders — дружелюбное сообщество AI-вайб-кодинга в Discord. Создавай с AI-агентами, делись проектами и релизь вместе с нами.",
     },
     nav: {
       about: "О нас",
@@ -328,13 +341,26 @@ export const ui = {
       backToTop: "Наверх",
     },
     hero: {
-      badge: "⚡ сообщество разработчиков",
-      titleStart: "Кодь с",
-      titleAccent: "хорошим вайбом",
+      badge: "⚡ сообщество AI-вайб-кодинга",
+      titleStart: "Вайб-кодь с",
+      titleAccent: "AI.",
+      titleEnd: "Релизь вместе.",
       subtitle:
-        "VibeCoders — дружелюбное Discord-сообщество разработчиков, которые создают, учатся и релизят вместе. Задавай вопросы, делись проектами, находи teammates.",
+        "VibeCoders — дружелюбное Discord-сообщество разработчиков, которые создают с AI-агентами, учатся и релизят вместе. Задавай вопросы, делись проектами, находи teammates.",
       ctaJoin: "Вступить в сообщество",
       ctaProjects: "Наши проекты",
+      terminal: {
+        title: "vibe — zsh",
+        lines: [
+          { t: "cmd", x: "pixie create app" },
+          { t: "out", x: "◆ AI генерирует компоненты…" },
+          { t: "code", x: "const app = await pixie.generate('landing')" },
+          { t: "ok", x: "✓ готово за 4.2s" },
+          { t: "cmd", x: "git push origin main" },
+          { t: "out", x: "◆ Деплоим в продакшн…" },
+          { t: "ok", x: "✓ в проде: vibecoders.community" },
+        ],
+      },
       stats: {
         members: "участников",
         support: "поддержка",
@@ -345,17 +371,17 @@ export const ui = {
       eyebrow: "кто мы",
       title: "Что такое VibeCoders?",
       subtitle:
-        "Уютное место для кодеров любого уровня — от первого «Hello, World» до продакшн-систем. Мы верим, что вместе учиться быстрее (и намного веселее).",
+        "Уютное место для кодеров любого уровня — от первого «Hello, World» до продакшн-систем, собранных с AI. Мы верим, что вайб-кодить вместе быстрее (и намного веселее).",
       cards: [
         {
           icon: "💬",
           title: "Реальная помощь, быстро",
-          text: "Застрял на баге? Кидай в help-каналы или открой тикет — сообщество и наш бот Pixie помогут.",
+          text: "Застрял на баге? Кидай в help-каналы или открой тикет — сообщество и наш AI-бот Pixie помогут.",
         },
         {
           icon: "🚀",
           title: "Релизь проекты",
-          text: "Показывай свои работы, получай честный фидбек, находи соавторов для сайд-проекта или игрового сервера.",
+          text: "Показывай проекты, собранные с AI, получай честный фидбек, находи соавторов для сайд-проекта или игрового сервера.",
         },
         {
           icon: "🌍",
@@ -375,8 +401,8 @@ export const ui = {
         },
         {
           tag: "🤖",
-          title: "Pixie — наш бот",
-          text: "Самописная модерация, приветствия и перевод по запросу: ПКМ по сообщению → Apps → Pixie → Translate.",
+          title: "Pixie — наш AI-бот",
+          text: "Самописный AI-ассистент, модерация, приветствия и перевод по запросу: ПКМ по сообщению → Apps → Pixie → Translate.",
         },
         {
           tag: "🛠️",
@@ -481,7 +507,7 @@ export const ui = {
       subtitle: "Люди, которые держат сервер в тонусе, а вайб — хорошим.",
       owner: {
         role: "Владелец и основатель",
-        text: "Строит инфраструктуру сообщества: боты, тикет-система, автоматизация и этот сайт.",
+        text: "Строит инфраструктуру сообщества: AI-боты, тикет-система, автоматизация и этот сайт.",
       },
       defaultMember: {
         role: "Участник команды",
@@ -564,7 +590,7 @@ export const ui = {
       status: "в сети",
       demoBadge: "скриптовое демо",
       greeting:
-        "Привет! Я Pixie ⚡ — бот сообщества. Спроси меня про тикеты, перевод, команду или как вступить. Учти: это скриптовое демо — настоящая я живу в нашем Discord.",
+        "Привет! Я Pixie ⚡ — AI-бот сообщества. Спроси меня про тикеты, перевод, команду или как вступить. Учти: это скриптовое демо — настоящая я живу в нашем Discord.",
       placeholder: "Спроси Pixie о чём-нибудь…",
       send: "Отправить",
       typing: "Pixie печатает…",
@@ -613,7 +639,7 @@ export const ui = {
     join: {
       eyebrow: "начни здесь",
       title: "Готов к вайбу?",
-      subtitle: "Залетай в Discord, поздоровайся и открой свой первый тикет. Это займёт минуту.",
+      subtitle: "Залетай в Discord, поздоровайся и зарелизь свой первый AI-проект вместе с нами. Это займёт минуту.",
       discord: "Вступить в Discord",
       github: "GitHub-организация",
       note: "Будь добрым. Без спама и токсичности — только код и хороший вайб.",

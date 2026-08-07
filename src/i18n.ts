@@ -165,25 +165,24 @@ export const ui = {
         role: "Owner & Founder",
         text: "Builds the community infrastructure: bots, ticket system, automation and this website.",
       },
-      members: [
-        {
-          name: "skyricelis",
+      defaultMember: {
+        role: "Team member",
+        text: "Part of the VibeCoders team.",
+      },
+      overrides: {
+        skyricelis: {
           role: "Hoster",
           text: "Our hoster — keeps the community's servers and infrastructure online.",
-          avatar: "/team/skyricelis.png",
         },
-        {
-          name: "daniilalt",
+        daniilalt035: {
           role: "ML Engineer",
           text: "Machine learning engineer of the community.",
-          avatar: "/team/daniilalt.png",
         },
-        {
-          name: "NOKK",
+        tot_samii_militarist: {
           role: "Software Engineer",
           text: "Rust, Python, C and C++ developer.",
         },
-      ],
+      },
       path: {
         title: "How to join the team",
         steps: [
@@ -412,25 +411,24 @@ export const ui = {
         role: "Владелец и основатель",
         text: "Строит инфраструктуру сообщества: боты, тикет-система, автоматизация и этот сайт.",
       },
-      members: [
-        {
-          name: "skyricelis",
+      defaultMember: {
+        role: "Участник команды",
+        text: "Часть команды VibeCoders.",
+      },
+      overrides: {
+        skyricelis: {
           role: "Хостер",
           text: "Наш хостер — держит серверы и инфраструктуру сообщества в онлайне.",
-          avatar: "/team/skyricelis.png",
         },
-        {
-          name: "daniilalt",
+        daniilalt035: {
           role: "ML-инженер",
           text: "Инженер машинного обучения сообщества.",
-          avatar: "/team/daniilalt.png",
         },
-        {
-          name: "NOKK",
+        tot_samii_militarist: {
           role: "Софтинженер",
           text: "Разработчик на Rust, Python, C и C++.",
         },
-      ],
+      },
       path: {
         title: "Как попасть в команду",
         steps: [

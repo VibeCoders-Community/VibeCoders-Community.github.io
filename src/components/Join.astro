@@ -1,0 +1,31 @@
+---
+import { DISCORD_INVITE, GITHUB_ORG_URL } from "../config";
+---
+
+<section id="join" class="border-y border-border bg-bg-alt py-24">
+  <div class="mx-auto max-w-5xl px-6 text-center">
+    <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">Ready to vibe?</h2>
+    <p class="mx-auto mb-8 max-w-xl text-muted">
+      Hop into the Discord, say hi, and open your first ticket. It takes a minute.
+    </p>
+    <div class="mb-6 flex flex-wrap justify-center gap-4">
+      <a
+        href={DISCORD_INVITE}
+        target="_blank"
+        rel="noopener"
+        class="rounded-xl bg-gradient-to-br from-accent to-accent-2 px-8 py-4 text-lg font-semibold text-white no-underline transition-shadow hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
+      >
+        Join on Discord
+      </a>
+      <a
+        href={GITHUB_ORG_URL}
+        target="_blank"
+        rel="noopener"
+        class="rounded-xl border border-border bg-white/[0.02] px-8 py-4 text-lg font-semibold no-underline transition-colors hover:bg-white/[0.06]"
+      >
+        GitHub organization
+      </a>
+    </div>
+    <p class="text-sm text-muted">Be kind. No spam, no toxicity — just code and good vibes.</p>
+  </div>
+</section>

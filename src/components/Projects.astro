@@ -1,0 +1,65 @@
+---
+import { GITHUB_ORG } from "../config";
+---
+
+<section id="projects" class="py-24">
+  <div class="mx-auto max-w-5xl px-6">
+    <h2 class="mb-4 text-center text-3xl font-extrabold tracking-tight md:text-4xl">Open source</h2>
+    <p class="mx-auto mb-12 max-w-2xl text-center text-muted">
+      Everything we build for the community is public on GitHub.
+    </p>
+    <div id="repo-grid" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-org={GITHUB_ORG}>
+      <p class="col-span-full text-center text-sm text-muted">Loading projects…</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  interface Repo {
+    name: string;
+    description: string | null;
+    html_url: string;
+    language: string | null;
+    stargazers_count: number;
+    fork: boolean;
+  }
+
+  const grid = document.getElementById("repo-grid")!;
+  const org = grid.dataset.org!;
+  const esc = (s: string) =>
+    s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
+  async function loadRepos() {
+    try {
+      const res = await fetch(`https://api.github.com/orgs/${org}/repos?per_page=6&sort=updated`);
+      if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+      const repos = ((await res.json()) as Repo[]).filter((r) => !r.fork && r.name !== ".github");
+      if (!repos.length) throw new Error("no repos");
+
+      grid.innerHTML = repos
+        .map(
+          (r) => `
+        <article class="rounded-2xl border border-border bg-card transition-all hover:-translate-y-1 hover:border-accent">
+          <a href="${r.html_url}" target="_blank" rel="noopener" class="block p-7 no-underline">
+            <h3 class="mb-2 text-lg font-bold">${esc(r.name)}</h3>
+            <p class="text-sm text-muted">${esc(r.description ?? "Community project.")}</p>
+            <div class="mt-4 flex gap-4 font-mono text-xs text-muted">
+              ${r.language ? `<span>● ${esc(r.language)}</span>` : ""}
+              <span>★ ${r.stargazers_count}</span>
+            </div>
+          </a>
+        </article>`,
+        )
+        .join("");
+    } catch {
+      grid.innerHTML = `
+        <article class="rounded-2xl border border-border bg-card sm:col-span-2 lg:col-span-3">
+          <a href="https://github.com/${org}" target="_blank" rel="noopener" class="block p-7 no-underline">
+            <h3 class="mb-2 text-lg font-bold">Our projects on GitHub</h3>
+            <p class="text-sm text-muted">Browse the ${org} organization repositories.</p>
+          </a>
+        </article>`;
+    }
+  }
+  loadRepos();
+</script>

@@ -1,0 +1,25 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Features from "../components/Features.astro";
+import Projects from "../components/Projects.astro";
+import Join from "../components/Join.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Base
+  title="VibeCoders — Code with good vibes"
+  description="VibeCoders is a friendly developer community on Discord. Share projects, get help, and build together."
+>
+  <Nav />
+  <main id="top">
+    <Hero />
+    <About />
+    <Features />
+    <Projects />
+    <Join />
+  </main>
+  <Footer />
+</Base>

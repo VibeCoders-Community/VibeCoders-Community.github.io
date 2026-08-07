@@ -12,21 +12,21 @@ const t = getUi(lang);
 
 <section class="spotlight relative overflow-hidden py-28 text-center md:py-36">
   <div
-    class="pointer-events-none absolute inset-x-0 -top-48 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.35),transparent_70%),radial-gradient(closest-side,rgba(0,212,255,0.18),transparent_70%)] bg-[position:30%_50%,70%_40%] bg-no-repeat"
+    class="hero-glow pointer-events-none absolute inset-x-0 -top-48 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.35),transparent_70%),radial-gradient(closest-side,rgba(0,212,255,0.18),transparent_70%)] bg-[position:30%_50%,70%_40%] bg-no-repeat"
     aria-hidden="true"
   ></div>
   <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
   <div class="relative mx-auto max-w-5xl px-6">
-    <p class="mb-6 inline-block rounded-full border border-border bg-bg-alt px-4 py-1.5 font-mono text-sm text-accent-2">
+    <p class="hero-in mb-6 inline-block rounded-full border border-border bg-bg-alt px-4 py-1.5 font-mono text-sm text-accent-2" style="--hd: 0ms">
       {t.hero.badge}
     </p>
-    <h1 class="mb-5 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl">
-      {t.hero.titleStart} <span class="bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">{t.hero.titleAccent}</span>
+    <h1 class="hero-in mb-5 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl" style="--hd: 90ms">
+      {t.hero.titleStart} <span class="hero-accent bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">{t.hero.titleAccent}</span>
     </h1>
-    <p class="mx-auto mb-9 max-w-xl text-lg text-muted">
+    <p class="hero-in mx-auto mb-9 max-w-xl text-lg text-muted" style="--hd: 180ms">
       {t.hero.subtitle}
     </p>
-    <div class="flex flex-wrap justify-center gap-4">
+    <div class="hero-in flex flex-wrap justify-center gap-4" style="--hd: 270ms">
       <a
         href="#join"
         class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
@@ -41,15 +41,15 @@ const t = getUi(lang);
       </a>
     </div>
     <div class="mt-16 flex flex-wrap justify-center gap-5">
-      <div class="rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm">
+      <div class="hero-in rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm" style="--hd: 400ms">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count={stats.members} data-suffix="" data-live-members>0</span>
         <span class="text-sm text-muted">{t.hero.stats.members}</span>
       </div>
-      <div class="rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm">
+      <div class="hero-in rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm" style="--hd: 480ms">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="24" data-suffix="/7">0</span>
         <span class="text-sm text-muted">{t.hero.stats.support}</span>
       </div>
-      <div class="rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm">
+      <div class="hero-in rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm" style="--hd: 560ms">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="0" data-suffix="">0</span>
         <span class="text-sm text-muted">{t.hero.stats.toxicity}</span>
       </div>

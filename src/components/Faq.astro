@@ -16,7 +16,7 @@ const t = getUi(lang);
       <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.faq.title}</h2>
       <p class="mx-auto max-w-2xl text-lg text-muted">{t.faq.subtitle}</p>
     </div>
-    <div class="mx-auto grid max-w-3xl gap-4">
+    <div class="mx-auto grid max-w-3xl gap-4 reveal-stagger">
       {t.faq.items.map((f) => (
         <details class="group rounded-2xl border border-border bg-card px-6 py-5 transition-colors duration-200 hover:border-accent/50">
           <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
@@ -33,3 +33,36 @@ const t = getUi(lang);
     </div>
   </div>
 </section>
+
+<script>
+  // Symmetric open/close animation for FAQ items: intercept the toggle while
+  // closing, collapse .faq-answer via .faq-closing, then remove [open].
+  const initFaq = () => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll<HTMLDetailsElement>("#faq details").forEach((d) => {
+      if (d.dataset.faqInit) return;
+      d.dataset.faqInit = "1";
+      const summary = d.querySelector("summary")!;
+      const answer = d.querySelector<HTMLElement>(".faq-answer")!;
+      summary.addEventListener("click", (e) => {
+        if (reduce) return; // native instant toggle
+        e.preventDefault();
+        if (!d.open) {
+          d.open = true; // opening animates via details[open] CSS
+          return;
+        }
+        d.classList.add("faq-closing");
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          d.open = false;
+          d.classList.remove("faq-closing");
+        };
+        answer.addEventListener("transitionend", finish, { once: true });
+        setTimeout(finish, 350); // fallback if transitionend never fires
+      });
+    });
+  };
+  document.addEventListener("astro:page-load", initFaq);
+</script>

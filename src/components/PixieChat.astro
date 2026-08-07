@@ -25,7 +25,11 @@ const t = getUi(lang);
   <div class="flex items-center gap-3 border-b border-border bg-card px-4 py-3">
     <img src="/logo.svg" alt="" width="28" height="28" class="rounded-full" />
     <div class="mr-auto">
-      <p class="text-sm font-bold">{t.pixieChat.title}</p>
+      <p class="flex items-center gap-2 text-sm font-bold">
+        {t.pixieChat.title}
+        <span class="status-dot" aria-hidden="true"></span>
+        <span class="text-xs font-normal text-muted">{t.pixieChat.status}</span>
+      </p>
       <p class="font-mono text-[10px] tracking-wider text-accent-2 uppercase">{t.pixieChat.demoBadge}</p>
     </div>
     <button id="pixie-close" class="cursor-pointer border-0 bg-transparent p-1 text-lg text-muted hover:text-text" aria-label="Close">✕</button>
@@ -67,8 +71,8 @@ const t = getUi(lang);
       el.textContent = text;
       el.className =
         from === "user"
-          ? "ml-8 self-end rounded-xl rounded-br-sm bg-gradient-to-br from-accent to-accent-2 px-3 py-2 text-sm text-white"
-          : "mr-8 self-start rounded-xl rounded-bl-sm bg-card px-3 py-2 text-sm text-text";
+          ? "pixie-msg ml-8 self-end rounded-xl rounded-br-sm bg-gradient-to-br from-accent to-accent-2 px-3 py-2 text-sm text-white"
+          : "pixie-msg mr-8 self-start rounded-xl rounded-bl-sm bg-card px-3 py-2 text-sm text-text";
       messages.appendChild(el);
       scroll();
       return el;

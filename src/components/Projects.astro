@@ -19,7 +19,7 @@ const t = getUi(lang);
         {t.projects.subtitle}
       </p>
     </div>
-    <div id="repo-grid" class="grid gap-6 sm:grid-cols-2" data-org={GITHUB_ORG}>
+    <div id="repo-grid" class="reveal-stagger grid gap-6 sm:grid-cols-2" data-org={GITHUB_ORG}>
       {t.projects.cards.map((c) => (
         <article
           class="card-hover rounded-2xl border border-border bg-card"
@@ -58,6 +58,25 @@ const t = getUi(lang);
     const esc = (s: string) =>
       s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
+    // GitHub linguist colors for the language dot.
+    const LANG_COLORS: Record<string, string> = {
+      JavaScript: "#f1e05a",
+      TypeScript: "#3178c6",
+      Python: "#3572A5",
+      Rust: "#dea584",
+      Astro: "#ff5a03",
+      HTML: "#e34c26",
+      CSS: "#563d7c",
+      Shell: "#89e051",
+      "C++": "#f34b7d",
+      C: "#555555",
+      Java: "#b07219",
+      Go: "#00ADD8",
+      Lua: "#000080",
+      Svelte: "#ff3e00",
+      Vue: "#41b883",
+    };
+
     try {
       const res = await fetch(`https://api.github.com/orgs/${org}/repos?per_page=100`);
       if (!res.ok) throw new Error(`GitHub API ${res.status}`);
@@ -68,7 +87,10 @@ const t = getUi(lang);
         if (!repo) return;
         const langEl = card.querySelector<HTMLElement>("[data-repo-language]");
         const starsEl = card.querySelector<HTMLElement>("[data-repo-stars]");
-        if (langEl && repo.language) langEl.innerHTML = `● ${esc(repo.language)}`;
+        if (langEl && repo.language) {
+          const color = LANG_COLORS[repo.language] ?? "#9aa4b8";
+          langEl.innerHTML = `<span style="color: ${color}">●</span> ${esc(repo.language)}`;
+        }
         if (starsEl) starsEl.textContent = `★ ${repo.stargazers_count}`;
       });
     } catch {

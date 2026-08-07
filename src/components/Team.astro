@@ -27,7 +27,7 @@ const members = teamData
       <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.team.title}</h2>
       <p class="mx-auto max-w-2xl text-lg text-muted">{t.team.subtitle}</p>
     </div>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <article class="card-hover rounded-2xl border border-accent/40 bg-card p-6">
         <img
           src="https://github.com/DARKPIX404.png"
@@ -78,7 +78,7 @@ const members = teamData
       ))}
     </div>
     <h3 class="mt-16 mb-8 text-center text-2xl font-extrabold tracking-tight">{t.team.path.title}</h3>
-    <div class="grid gap-6 sm:grid-cols-3">
+    <div class="reveal-stagger grid gap-6 sm:grid-cols-3">
       {t.team.path.steps.map((s) => (
         <article class="card-hover rounded-2xl border border-border bg-card p-6">
           <h4 class="mb-2 font-bold text-accent-2">{s.title}</h4>

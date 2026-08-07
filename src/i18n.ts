@@ -47,7 +47,7 @@ export const ui = {
         {
           icon: "🌍",
           title: "Open for everyone",
-          text: "Any language, any stack, any timezone. Russian and English speakers welcome — our translator bot smooths the rest.",
+          text: "Any language, any stack, any timezone. A fully international community — Pixie translates any message on demand.",
         },
       ],
     },
@@ -62,7 +62,7 @@ export const ui = {
         {
           tag: "🤖",
           title: "Pixie, our community bot",
-          text: "Custom-built moderation, welcome flows and instant translation between Russian and English channels.",
+          text: "Custom-built moderation, welcome flows and on-demand translation: right-click any message → Apps → Pixie → Translate.",
         },
         {
           tag: "🛠️",
@@ -81,7 +81,7 @@ export const ui = {
       subtitle:
         "No noisy DMs, no lost messages. Here's the real support flow inside our Discord.",
       channelsLabel: "Text channels",
-      channels: ["announcements", "general", "help-en", "help-ru", "ticket-0042"],
+      channels: ["announcements", "general", "help", "showcase", "ticket-0042"],
       panel: {
         author: "Pixie",
         time: "Today at 6:42 PM",
@@ -119,8 +119,8 @@ export const ui = {
           text: "Zero tolerance: no adult content, piracy, cheats, or anything against the law or Discord ToS.",
         },
         {
-          title: "Mind the channel language",
-          text: "Keep English in the English channels and Russian in the Russian ones. Pixie translates the rest.",
+          title: "Any language works",
+          text: "Write in whatever language you're comfortable with. Need a translation? Right-click a message → Apps → Pixie → Translate.",
         },
         {
           title: "Use tickets for support",
@@ -146,7 +146,7 @@ export const ui = {
         },
         {
           q: "Which languages can I speak?",
-          a: "English in the English channels, Russian in the Russian ones. Our bot Pixie translates between them, so everyone understands each other.",
+          a: "Any language you like — the community is fully international. Don't understand a message? Right-click it → Apps → Pixie → Translate.",
         },
         {
           q: "Can I contribute to community projects?",
@@ -293,7 +293,7 @@ export const ui = {
         {
           icon: "🌍",
           title: "Открыто для всех",
-          text: "Любой язык, любой стек, любой часовой пояс. Русскоязычным и англоязычным рады — бот-переводчик сгладит остальное.",
+          text: "Любой язык, любой стек, любой часовой пояс. Полностью международное сообщество — Pixie переведёт любое сообщение по запросу.",
         },
       ],
     },
@@ -308,7 +308,7 @@ export const ui = {
         {
           tag: "🤖",
           title: "Pixie — наш бот",
-          text: "Самописная модерация, приветствия и мгновенный перевод между русскими и английскими каналами.",
+          text: "Самописная модерация, приветствия и перевод по запросу: ПКМ по сообщению → Apps → Pixie → Translate.",
         },
         {
           tag: "🛠️",
@@ -327,7 +327,7 @@ export const ui = {
       subtitle:
         "Без шумных личек и потерянных сообщений. Вот реальный флоу поддержки в нашем Discord.",
       channelsLabel: "Текстовые каналы",
-      channels: ["announcements", "general", "help-en", "help-ru", "ticket-0042"],
+      channels: ["announcements", "general", "help", "showcase", "ticket-0042"],
       panel: {
         author: "Pixie",
         time: "Сегодня, в 18:42",
@@ -365,8 +365,8 @@ export const ui = {
           text: "Нулевая терпимость: никакого 18+, пиратства, читов и ничего против закона или правил Discord.",
         },
         {
-          title: "Соблюдай язык каналов",
-          text: "Английский — в английских каналах, русский — в русских. Остальное Pixie переведёт.",
+          title: "Пиши на любом языке",
+          text: "Общайся на удобном тебе языке. Нужен перевод? ПКМ по сообщению → Apps → Pixie → Translate.",
         },
         {
           title: "Поддержка — через тикеты",
@@ -392,7 +392,7 @@ export const ui = {
         },
         {
           q: "На каких языках можно общаться?",
-          a: "Английский — в английских каналах, русский — в русских. Наш бот Pixie переводит между ними, так что все друг друга понимают.",
+          a: "На любом — сообщество полностью международное. Непонятное сообщение переведёт Pixie: ПКМ по сообщению → Apps → Pixie → Translate.",
         },
         {
           q: "Могу ли я поучаствовать в проектах сообщества?",

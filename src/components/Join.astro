@@ -10,10 +10,14 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="join" class="reveal scroll-mt-20 border-y border-border bg-bg-alt py-24">
-  <div class="mx-auto max-w-5xl px-6 text-center">
+<section id="join" class="reveal scroll-mt-20 relative overflow-hidden border-y border-white/[0.06] py-28">
+  <div
+    class="hero-glow pointer-events-none absolute inset-x-0 -bottom-64 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.3),transparent_70%),radial-gradient(closest-side,rgba(255,92,168,0.16),transparent_70%)] bg-[position:35%_50%,65%_45%] bg-no-repeat"
+    aria-hidden="true"
+  ></div>
+  <div class="relative mx-auto max-w-5xl px-6 text-center">
     <p class="eyebrow mb-4">{t.join.eyebrow}</p>
-    <h2 class="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.join.title}</h2>
+    <h2 class="title-glow mb-4 text-3xl font-extrabold tracking-tight md:text-5xl">{t.join.title}</h2>
     <p class="mx-auto mb-8 max-w-xl text-lg text-muted">
       {t.join.subtitle}
     </p>
@@ -22,7 +26,7 @@ const t = getUi(lang);
         href={DISCORD_INVITE}
         target="_blank"
         rel="noopener"
-        class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-8 py-4 text-lg font-semibold text-white no-underline hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
+        class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-8 py-4 text-lg font-semibold text-white no-underline"
       >
         {t.join.discord}
       </a>
@@ -30,7 +34,7 @@ const t = getUi(lang);
         href={GITHUB_ORG_URL}
         target="_blank"
         rel="noopener"
-        class="btn-ghost rounded-xl border border-border bg-white/[0.02] px-8 py-4 text-lg font-semibold no-underline"
+        class="btn-ghost rounded-xl border border-white/10 bg-white/[0.03] px-8 py-4 text-lg font-semibold no-underline backdrop-blur-sm"
       >
         {t.join.github}
       </a>

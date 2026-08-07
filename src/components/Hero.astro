@@ -8,48 +8,82 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getUi(lang);
+const term = t.hero.terminal;
 ---
 
-<section class="spotlight relative overflow-hidden py-28 text-center md:py-36">
+<section class="spotlight relative overflow-hidden py-20 md:py-28 lg:py-32">
   <div
     class="hero-glow pointer-events-none absolute inset-x-0 -top-48 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.35),transparent_70%),radial-gradient(closest-side,rgba(0,212,255,0.18),transparent_70%)] bg-[position:30%_50%,70%_40%] bg-no-repeat"
     aria-hidden="true"
   ></div>
   <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
-  <div class="relative mx-auto max-w-5xl px-6">
-    <p class="hero-in mb-6 inline-block rounded-full border border-border bg-bg-alt px-4 py-1.5 font-mono text-sm text-accent-2" style="--hd: 0ms">
-      {t.hero.badge}
-    </p>
-    <h1 class="hero-in mb-5 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl" style="--hd: 90ms">
-      {t.hero.titleStart} <span class="hero-accent bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">{t.hero.titleAccent}</span>
-    </h1>
-    <p class="hero-in mx-auto mb-9 max-w-xl text-lg text-muted" style="--hd: 180ms">
-      {t.hero.subtitle}
-    </p>
-    <div class="hero-in flex flex-wrap justify-center gap-4" style="--hd: 270ms">
-      <a
-        href="#join"
-        class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline hover:shadow-[0_6px_24px_rgba(124,92,255,0.45)]"
-      >
-        {t.hero.ctaJoin}
-      </a>
-      <a
-        href="#projects"
-        class="btn-ghost rounded-xl border border-border bg-white/[0.02] px-7 py-3.5 font-semibold no-underline"
-      >
-        {t.hero.ctaProjects}
-      </a>
+  <div class="relative mx-auto max-w-6xl px-6">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
+      <div class="text-center lg:text-left">
+        <p class="hero-in mb-6 inline-block rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 font-mono text-sm text-accent-2 backdrop-blur-sm" style="--hd: 0ms">
+          {t.hero.badge}
+        </p>
+        <h1 class="hero-in mb-5 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl lg:text-7xl" style="--hd: 90ms">
+          {t.hero.titleStart} <span class="hero-accent bg-gradient-to-br from-accent via-accent-2 to-accent-3 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(124,92,255,0.45)]">{t.hero.titleAccent}</span>
+          <span class="title-glow block">{t.hero.titleEnd}</span>
+        </h1>
+        <p class="hero-in mx-auto mb-9 max-w-xl text-lg text-muted lg:mx-0" style="--hd: 180ms">
+          {t.hero.subtitle}
+        </p>
+        <div class="hero-in flex flex-wrap justify-center gap-4 lg:justify-start" style="--hd: 270ms">
+          <a
+            href="#join"
+            class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline"
+          >
+            {t.hero.ctaJoin}
+          </a>
+          <a
+            href="#projects"
+            class="btn-ghost rounded-xl border border-white/10 bg-white/[0.03] px-7 py-3.5 font-semibold no-underline backdrop-blur-sm"
+          >
+            {t.hero.ctaProjects}
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-in" style="--hd: 320ms">
+        <div class="terminal" role="img" aria-label={term.title}>
+          <div class="terminal-bar">
+            <span class="terminal-dot bg-[#ff5f57]"></span>
+            <span class="terminal-dot bg-[#febc2e]"></span>
+            <span class="terminal-dot bg-[#28c840]"></span>
+            <span class="ml-3 font-mono text-xs text-muted">{term.title}</span>
+          </div>
+          <div id="terminal-body" class="terminal-body font-mono" data-lines={JSON.stringify(term.lines)}>
+            {term.lines.map((l) => (
+              <div class={`tl tl-${l.t}`}>
+                {l.t === "cmd" ? (
+                  <>
+                    <span class="tl-prompt">$</span> {l.x}
+                  </>
+                ) : (
+                  l.x
+                )}
+              </div>
+            ))}
+            <div class="tl tl-cmd">
+              <span class="tl-prompt">$</span> <span class="tl-cursor"></span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div class="mt-16 flex flex-wrap justify-center gap-5">
-      <div class="hero-in rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm" style="--hd: 400ms">
+      <div class="hero-in glass rounded-2xl px-8 py-5" style="--hd: 400ms">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count={stats.members} data-suffix="" data-live-members>0</span>
         <span class="text-sm text-muted">{t.hero.stats.members}</span>
       </div>
-      <div class="hero-in rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm" style="--hd: 480ms">
+      <div class="hero-in glass rounded-2xl px-8 py-5" style="--hd: 480ms">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="24" data-suffix="/7">0</span>
         <span class="text-sm text-muted">{t.hero.stats.support}</span>
       </div>
-      <div class="hero-in rounded-2xl border border-border bg-card/60 px-8 py-5 backdrop-blur-sm" style="--hd: 560ms">
+      <div class="hero-in glass rounded-2xl px-8 py-5" style="--hd: 560ms">
         <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="0" data-suffix="">0</span>
         <span class="text-sm text-muted">{t.hero.stats.toxicity}</span>
       </div>
@@ -104,7 +138,72 @@ const t = getUi(lang);
     );
     counters.forEach((c) => io.observe(c));
   };
+
+  // Terminal typing loop. The SSR markup is the static "final frame" —
+  // with reduced motion (or no JS) it simply stays as rendered.
+  const initTerminal = () => {
+    const body = document.getElementById("terminal-body");
+    if (!body || body.dataset.termInit) return;
+    body.dataset.termInit = "1";
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    interface TermLine {
+      t: "cmd" | "out" | "ok" | "code";
+      x: string;
+    }
+    const lines = JSON.parse(body.dataset.lines!) as TermLine[];
+    const esc = (s: string) =>
+      s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+    const highlight = (s: string) =>
+      esc(s)
+        .replace(/(&#39;[^&]*?&#39;)/g, '<span class="tk-str">$1</span>')
+        .replace(/\b(const|await|return|import|from|new)\b/g, '<span class="tk-kw">$1</span>')
+        .replace(/\b(\w+)(?=\()/g, '<span class="tk-fn">$1</span>');
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+    const run = async () => {
+      while (body.isConnected) {
+        body.innerHTML = "";
+        for (const line of lines) {
+          if (!body.isConnected) return;
+          const div = document.createElement("div");
+          div.className = `tl tl-${line.t}`;
+          body.appendChild(div);
+          if (line.t === "cmd") {
+            div.innerHTML = '<span class="tl-prompt">$</span> ';
+            const text = document.createElement("span");
+            const cursor = document.createElement("span");
+            cursor.className = "tl-cursor";
+            div.append(text, cursor);
+            for (const ch of line.x) {
+              if (!body.isConnected) return;
+              text.textContent += ch;
+              await sleep(34 + Math.random() * 40);
+            }
+            cursor.remove();
+            await sleep(420);
+          } else {
+            div.style.opacity = "0";
+            div.innerHTML = line.t === "code" ? highlight(line.x) : esc(line.x);
+            requestAnimationFrame(() => {
+              div.style.transition = "opacity 0.3s ease";
+              div.style.opacity = "1";
+            });
+            await sleep(line.t === "ok" ? 650 : 850);
+          }
+        }
+        const end = document.createElement("div");
+        end.className = "tl tl-cmd";
+        end.innerHTML = '<span class="tl-prompt">$</span> <span class="tl-cursor"></span>';
+        body.appendChild(end);
+        await sleep(4200);
+      }
+    };
+    void run();
+  };
+
   document.addEventListener("astro:page-load", () => {
     void initCounters();
+    initTerminal();
   });
 </script>

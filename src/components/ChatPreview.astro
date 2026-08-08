@@ -12,21 +12,21 @@ const chat = t.chat;
 
 <section class="reveal py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <div class="mb-12 text-center">
-      <p class="eyebrow mb-4">{chat.eyebrow}</p>
-      <h2 class="title-glow mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{chat.title}</h2>
-      <p class="mx-auto max-w-2xl text-lg text-muted">{chat.subtitle}</p>
-    </div>
+    <p class="eyebrow mb-6">{chat.eyebrow}</p>
+    <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+      {chat.titleStart} <span class="text-accent">{chat.titleAccent}</span>
+    </h2>
+    <p class="mb-12 max-w-2xl text-lg text-muted">{chat.subtitle}</p>
 
-    <div class="glass overflow-hidden rounded-2xl shadow-[0_12px_48px_rgba(0,0,0,0.35)]">
-      <div class="flex items-center gap-2 border-b border-white/[0.07] bg-white/[0.03] px-4 py-3">
-        <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
-        <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
-        <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot bg-[#ff5f57]"></span>
+        <span class="terminal-dot bg-[#febc2e]"></span>
+        <span class="terminal-dot bg-[#28c840]"></span>
         <span class="ml-3 font-mono text-xs text-muted">VibeCoders · Discord</span>
       </div>
       <div class="grid sm:grid-cols-[220px_1fr]">
-        <aside class="hidden border-r border-white/[0.07] bg-white/[0.02] p-4 sm:block">
+        <aside class="hidden border-r border-white/[0.07] p-4 sm:block">
           <p class="mb-2 px-2 font-mono text-[11px] font-semibold tracking-wider text-muted uppercase">
             {chat.channelsLabel}
           </p>
@@ -34,7 +34,7 @@ const chat = t.chat;
             {chat.channels.map((ch) => (
               <li
                 class:list={[
-                  "rounded-md px-2 py-1.5 font-mono text-sm",
+                  "px-2 py-1.5 font-mono text-sm",
                   ch.startsWith("ticket-")
                     ? "bg-accent/15 text-accent-2"
                     : "text-muted",
@@ -47,39 +47,39 @@ const chat = t.chat;
         </aside>
         <div class="grid gap-5 p-5">
           <div class="flex gap-3">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-lg">⚡</div>
-            <div>
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center bg-accent text-lg text-white">⚡</div>
+            <div class="min-w-0">
               <p class="text-sm">
                 <span class="font-semibold text-accent-2">{chat.panel.author}</span>
-                <span class="ml-1 rounded bg-accent px-1.5 py-0.5 font-mono text-[10px] font-semibold text-white">BOT</span>
+                <span class="ml-1 bg-accent px-1.5 py-0.5 font-mono text-[10px] font-semibold text-white">BOT</span>
                 <span class="ml-2 text-xs text-muted">{chat.panel.time}</span>
               </p>
               <p class="mt-1 max-w-lg text-sm text-muted">{chat.panel.text}</p>
-              <button class="mt-3 cursor-default rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white">
+              <button class="btn-fx mt-3 cursor-default px-4 py-2 text-sm font-semibold text-white">
                 {chat.panel.button}
               </button>
             </div>
           </div>
 
-          <div class="mx-auto w-full max-w-md rounded-2xl border border-white/10 bg-white/[0.04] p-5">
+          <div class="w-full max-w-md border border-white/10 bg-white/[0.03] p-5">
             <p class="mb-3 font-bold">{chat.modal.title}</p>
             <label class="mb-1 block font-mono text-[11px] font-semibold tracking-wider text-muted uppercase">
               {chat.modal.field}
             </label>
-            <div class="rounded-lg border border-white/10 bg-white/[0.05] px-3 py-2 text-sm">{chat.modal.value}</div>
+            <div class="border border-white/10 bg-white/[0.04] px-3 py-2 text-sm">{chat.modal.value}</div>
             <div class="mt-4 flex justify-end gap-2">
-              <span class="rounded-lg px-4 py-2 text-sm text-muted">{chat.modal.cancel}</span>
-              <span class="rounded-lg bg-gradient-to-br from-accent to-accent-2 px-4 py-2 text-sm font-semibold text-white">
+              <span class="px-4 py-2 text-sm text-muted">{chat.modal.cancel}</span>
+              <span class="bg-accent px-4 py-2 text-sm font-semibold text-white">
                 {chat.modal.submit}
               </span>
             </div>
           </div>
 
-          <p class="text-center font-mono text-xs text-accent-2">{chat.created}</p>
+          <p class="font-mono text-xs text-accent-3">{chat.created}</p>
 
           <div class="flex gap-3">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/[0.06] text-lg ring-1 ring-white/10">🔨</div>
-            <div>
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center border border-white/10 bg-white/[0.05] text-lg">🔨</div>
+            <div class="min-w-0">
               <p class="text-sm">
                 <span class="font-semibold text-text">{chat.reply.author}</span>
                 <span class="ml-2 text-xs text-muted">{chat.reply.time}</span>

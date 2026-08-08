@@ -8,37 +8,47 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getUi(lang);
+
+const prefixColors: Record<string, string> = {
+  $: "text-accent-3",
+  ">": "text-accent-2",
+  "#": "text-muted",
+};
 ---
 
-<section id="projects" class="reveal scroll-mt-20 py-24">
+<section id="projects" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <div class="mb-12 text-center">
-      <p class="eyebrow mb-4">{t.projects.eyebrow}</p>
-      <h2 class="title-glow mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.projects.title}</h2>
-      <p class="mx-auto max-w-2xl text-lg text-muted">
-        {t.projects.subtitle}
-      </p>
+    <p class="eyebrow mb-6">{t.projects.eyebrow}</p>
+    <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+      {t.projects.titleStart} <span class="text-accent">{t.projects.titleAccent}</span>
+    </h2>
+    <p class="mb-10 max-w-2xl text-lg text-muted">{t.projects.subtitle}</p>
+
+    <div class="terminal mb-10 p-5 font-mono text-sm leading-8">
+      {t.projects.term.map((l) => (
+        <div class={prefixColors[l.p] ?? "text-muted"}>
+          <span class="font-semibold">{l.p}</span> {l.x}
+        </div>
+      ))}
     </div>
-    <div id="repo-grid" class="reveal-stagger grid gap-6 sm:grid-cols-2" data-org={GITHUB_ORG}>
+
+    <div id="repo-grid" class="reveal-stagger border-t border-white/[0.07]" data-org={GITHUB_ORG}>
       {t.projects.cards.map((c) => (
-        <article
-          class="card-hover glass rounded-2xl"
-          data-repo={c.repo}
-        >
+        <div data-repo={c.repo}>
           <a
             href={`https://github.com/${GITHUB_ORG}/${c.repo}`}
             target="_blank"
             rel="noopener"
-            class="block p-6 no-underline"
+            class="flex flex-col gap-1 border-b border-white/[0.07] px-2 py-5 no-underline transition-colors duration-200 hover:bg-white/[0.02] sm:flex-row sm:items-baseline sm:gap-6"
           >
-            <h3 class="mb-2 text-lg font-bold break-words">{c.name}</h3>
-            <p class="text-sm text-muted">{c.description}</p>
-            <div class="mt-4 flex gap-4 font-mono text-xs text-muted">
+            <h3 class="shrink-0 font-bold break-words sm:w-64">{c.name}</h3>
+            <p class="min-w-0 flex-1 text-sm text-muted">{c.description}</p>
+            <span class="flex shrink-0 gap-4 font-mono text-xs text-muted">
               <span data-repo-language></span>
               <span data-repo-stars></span>
-            </div>
+            </span>
           </a>
-        </article>
+        </div>
       ))}
     </div>
   </div>
@@ -88,13 +98,13 @@ const t = getUi(lang);
         const langEl = card.querySelector<HTMLElement>("[data-repo-language]");
         const starsEl = card.querySelector<HTMLElement>("[data-repo-stars]");
         if (langEl && repo.language) {
-          const color = LANG_COLORS[repo.language] ?? "#9aa4b8";
+          const color = LANG_COLORS[repo.language] ?? "#9c96b8";
           langEl.innerHTML = `<span style="color: ${color}">●</span> ${esc(repo.language)}`;
         }
         if (starsEl) starsEl.textContent = `★ ${repo.stargazers_count}`;
       });
     } catch {
-      /* static cards stay as the fallback */
+      /* static rows stay as the fallback */
     }
   };
   document.addEventListener("astro:page-load", () => {

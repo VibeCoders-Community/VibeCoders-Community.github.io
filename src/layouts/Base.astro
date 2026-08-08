@@ -56,7 +56,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#05060a" />
+    <meta name="theme-color" content="#0a0a12" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
     <link rel="alternate" hreflang="ru" href={ruUrl} />
@@ -88,19 +88,13 @@ const jsonLd = {
     <link rel="preconnect" href="https://cdn.discordapp.com" />
     <link rel="dns-prefetch" href="https://cdn.discordapp.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <ClientRouter />
   </head>
   <body class="font-sans antialiased leading-relaxed">
-    <div class="aurora" aria-hidden="true">
-      <div class="aurora-blob aurora-blob-1"></div>
-      <div class="aurora-blob aurora-blob-2"></div>
-      <div class="aurora-blob aurora-blob-3"></div>
-    </div>
-    <div class="noise" aria-hidden="true"></div>
     <div id="scroll-progress" aria-hidden="true"></div>
     <slot />
     <button id="back-to-top" aria-label={t.a11y.backToTop} title={t.a11y.backToTop}>
@@ -134,23 +128,9 @@ const jsonLd = {
       };
       document.addEventListener("astro:page-load", initReveal);
 
-      // Cursor-tracked glow + pixel-cube button effects.
+      // Pixel-cube button effects.
       const initFx = () => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-        // Spotlight / card glow: track pointer, expose --mx/--my in px.
-        const track = (el: HTMLElement) => {
-          if (el.dataset.fxTrack) return;
-          el.dataset.fxTrack = "1";
-          el.addEventListener("pointermove", (ev) => {
-            const r = el.getBoundingClientRect();
-            el.style.setProperty("--mx", `${ev.clientX - r.left}px`);
-            el.style.setProperty("--my", `${ev.clientY - r.top}px`);
-          });
-        };
-        document
-          .querySelectorAll<HTMLElement>(".spotlight, article")
-          .forEach(track);
 
         // Pixel grid overlay for .btn-fx buttons.
         document

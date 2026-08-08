@@ -9,23 +9,23 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="about" class="reveal scroll-mt-20 py-24">
+<section id="about" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <div class="mb-12 text-center">
-      <p class="eyebrow mb-4">{t.about.eyebrow}</p>
-      <h2 class="title-glow mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.about.title}</h2>
-      <p class="mx-auto max-w-2xl text-lg text-muted">
-        {t.about.subtitle}
-      </p>
-    </div>
-    <div class="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {t.about.cards.map((c) => (
-        <article class="card-hover glass rounded-2xl p-6">
-          <div class="mb-4 text-3xl">{c.icon}</div>
-          <h3 class="mb-2 text-lg font-bold">{c.title}</h3>
-          <p class="text-sm text-muted">{c.text}</p>
-        </article>
+    <p class="eyebrow mb-6">{t.about.eyebrow}</p>
+    <h2 class="mb-14 max-w-4xl text-2xl leading-[1.2] font-bold tracking-tight sm:text-3xl md:text-4xl">
+      <span class="text-text">{t.about.statementStart} </span><span class="text-muted">{t.about.statementMid} </span><span class="text-accent-3">{t.about.statementAccent}</span> <span class="text-muted">{t.about.statementEnd}</span>
+    </h2>
+    <div class="reveal-stagger grid gap-10 border-t border-white/[0.07] pt-10 sm:grid-cols-3">
+      {t.about.cards.map((c, i) => (
+        <div>
+          <div class="mb-4 font-display text-2xl font-bold text-accent">
+            {String(i + 1).padStart(2, "0")}
+          </div>
+          <h3 class="mb-3 text-lg font-bold">{c.title}</h3>
+          <p class="text-sm leading-relaxed text-muted">{c.text}</p>
+        </div>
       ))}
     </div>
+    <p class="mt-14 border-t border-white/[0.07] pt-6 font-mono text-sm text-accent-3">{t.about.echo}</p>
   </div>
 </section>

@@ -11,39 +11,40 @@ const t = getUi(lang);
 const term = t.hero.terminal;
 ---
 
-<section class="spotlight relative overflow-hidden py-20 md:py-28 lg:py-32">
-  <div
-    class="hero-glow pointer-events-none absolute inset-x-0 -top-48 h-[500px] bg-[radial-gradient(closest-side,rgba(124,92,255,0.35),transparent_70%),radial-gradient(closest-side,rgba(0,212,255,0.18),transparent_70%)] bg-[position:30%_50%,70%_40%] bg-no-repeat"
-    aria-hidden="true"
-  ></div>
-  <div class="bg-grid pointer-events-none absolute inset-0" aria-hidden="true"></div>
+<section class="relative overflow-hidden py-20 md:py-28 lg:py-32">
+  <div class="stars pointer-events-none absolute inset-0" aria-hidden="true"></div>
   <div class="relative mx-auto max-w-6xl px-6">
     <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
       <div class="text-center lg:text-left">
-        <p class="hero-in mb-6 inline-block rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 font-mono text-sm text-accent-2 backdrop-blur-sm" style="--hd: 0ms">
+        <p class="hero-in eyebrow mb-6" style="--hd: 0ms">
           {t.hero.badge}
         </p>
-        <h1 class="hero-in mb-5 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl md:text-6xl lg:text-7xl" style="--hd: 90ms">
-          {t.hero.titleStart} <span class="hero-accent bg-gradient-to-br from-accent via-accent-2 to-accent-3 bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(124,92,255,0.45)]">{t.hero.titleAccent}</span>
-          <span class="title-glow block">{t.hero.titleEnd}</span>
+        <h1 class="hero-in mb-6 text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl" style="--hd: 90ms">
+          <span class="block text-text">{t.hero.titleStart}</span>
+          <span class="block text-accent drop-shadow-[0_0_32px_rgba(139,92,246,0.45)]">{t.hero.titleAccent}</span>
         </h1>
-        <p class="hero-in mx-auto mb-9 max-w-xl text-lg text-muted lg:mx-0" style="--hd: 180ms">
+        <p class="hero-in mx-auto mb-8 max-w-xl text-lg text-muted lg:mx-0" style="--hd: 180ms">
           {t.hero.subtitle}
         </p>
         <div class="hero-in flex flex-wrap justify-center gap-4 lg:justify-start" style="--hd: 270ms">
           <a
             href="#join"
-            class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline"
+            class="btn-fx px-7 py-3.5 font-semibold text-white no-underline"
           >
             {t.hero.ctaJoin}
           </a>
           <a
             href="#projects"
-            class="btn-ghost rounded-xl border border-white/10 bg-white/[0.03] px-7 py-3.5 font-semibold no-underline backdrop-blur-sm"
+            class="btn-ghost border border-white/15 px-7 py-3.5 font-semibold no-underline"
           >
             {t.hero.ctaProjects}
           </a>
         </div>
+        <p class="hero-in mt-6" style="--hd: 340ms">
+          <span class="inline-block border border-white/15 px-3 py-1.5 font-mono text-xs tracking-wider text-muted">
+            {t.hero.chip}
+          </span>
+        </p>
       </div>
 
       <div class="hero-in w-full min-w-0" style="--hd: 320ms">
@@ -74,18 +75,18 @@ const term = t.hero.terminal;
       </div>
     </div>
 
-    <div class="mt-16 flex flex-wrap justify-center gap-5">
-      <div class="hero-in glass rounded-2xl px-8 py-5" style="--hd: 400ms">
-        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count={stats.members} data-suffix="" data-live-members>0</span>
-        <span class="text-sm text-muted">{t.hero.stats.members}</span>
+    <div class="mt-16 flex flex-wrap justify-center gap-x-14 gap-y-8 border-t border-white/[0.07] pt-10 lg:justify-start">
+      <div class="hero-in" style="--hd: 400ms">
+        <span class="block font-mono text-4xl font-semibold text-text" data-count={stats.members} data-suffix="" data-live-members>0</span>
+        <span class="mt-1 block font-mono text-xs tracking-wider text-muted uppercase">{t.hero.stats.members}</span>
       </div>
-      <div class="hero-in glass rounded-2xl px-8 py-5" style="--hd: 480ms">
-        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="24" data-suffix="/7">0</span>
-        <span class="text-sm text-muted">{t.hero.stats.support}</span>
+      <div class="hero-in" style="--hd: 480ms">
+        <span class="block font-mono text-4xl font-semibold text-accent" data-count="24" data-suffix="/7">0</span>
+        <span class="mt-1 block font-mono text-xs tracking-wider text-muted uppercase">{t.hero.stats.support}</span>
       </div>
-      <div class="hero-in glass rounded-2xl px-8 py-5" style="--hd: 560ms">
-        <span class="block font-mono text-3xl font-semibold text-accent-2" data-count="0" data-suffix="">0</span>
-        <span class="text-sm text-muted">{t.hero.stats.toxicity}</span>
+      <div class="hero-in" style="--hd: 560ms">
+        <span class="block font-mono text-4xl font-semibold text-accent-3" data-count="0" data-suffix="%">0</span>
+        <span class="mt-1 block font-mono text-xs tracking-wider text-muted uppercase">{t.hero.stats.toxicity}</span>
       </div>
     </div>
   </div>
@@ -154,11 +155,6 @@ const term = t.hero.terminal;
     const lines = JSON.parse(body.dataset.lines!) as TermLine[];
     const esc = (s: string) =>
       s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
-    const highlight = (s: string) =>
-      esc(s)
-        .replace(/(&#39;[^&]*?&#39;)/g, '<span class="tk-str">$1</span>')
-        .replace(/\b(const|await|return|import|from|new)\b/g, '<span class="tk-kw">$1</span>')
-        .replace(/\b(\w+)(?=\()/g, '<span class="tk-fn">$1</span>');
     const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
     const run = async () => {
@@ -184,7 +180,7 @@ const term = t.hero.terminal;
             await sleep(420);
           } else {
             div.style.opacity = "0";
-            div.innerHTML = line.t === "code" ? highlight(line.x) : esc(line.x);
+            div.textContent = line.x;
             requestAnimationFrame(() => {
               div.style.transition = "opacity 0.3s ease";
               div.style.opacity = "1";

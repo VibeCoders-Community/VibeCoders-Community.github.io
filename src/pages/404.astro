@@ -4,19 +4,19 @@ import { DISCORD_INVITE } from "../config";
 ---
 
 <Base title="404 — Page not found | VibeCoders" description="This page doesn't exist — but the vibes do." lang="en">
-  <main class="relative flex min-h-screen items-center justify-center px-6">
-    <div class="text-center">
-      <p class="eyebrow mb-6">lost in the vibes</p>
-      <h1 class="hero-accent bg-gradient-to-br from-accent via-accent-2 to-accent-3 bg-clip-text text-8xl font-extrabold tracking-tight text-transparent drop-shadow-[0_0_32px_rgba(124,92,255,0.4)] md:text-9xl">
+  <main class="relative flex min-h-screen items-center px-6">
+    <div class="mx-auto w-full max-w-5xl">
+      <p class="eyebrow mb-6">// lost in the vibes</p>
+      <h1 class="text-7xl font-extrabold tracking-tight text-accent drop-shadow-[0_0_36px_rgba(139,92,246,0.45)] md:text-9xl">
         404
       </h1>
-      <p class="mx-auto mt-5 max-w-md text-lg text-muted">
+      <p class="mt-5 max-w-md text-lg text-muted">
         This page drifted off into the void. Let's get you back to the good vibes.
       </p>
-      <div class="mt-9 flex flex-wrap justify-center gap-4">
+      <div class="mt-9 flex flex-wrap gap-4">
         <a
           href="/"
-          class="btn-fx rounded-xl bg-gradient-to-br from-accent to-accent-2 px-7 py-3.5 font-semibold text-white no-underline"
+          class="btn-fx px-7 py-3.5 font-semibold text-white no-underline"
         >
           Back home
         </a>
@@ -24,11 +24,12 @@ import { DISCORD_INVITE } from "../config";
           href={DISCORD_INVITE}
           target="_blank"
           rel="noopener"
-          class="btn-ghost rounded-xl border border-white/10 bg-white/[0.03] px-7 py-3.5 font-semibold no-underline backdrop-blur-sm"
+          class="btn-ghost border border-white/15 px-7 py-3.5 font-semibold no-underline"
         >
           Join our Discord
         </a>
       </div>
+      <p class="mt-10 font-mono text-xs text-muted">$ cd /home <span class="text-accent-3"># wrong turn — this way</span></p>
     </div>
   </main>
 </Base>

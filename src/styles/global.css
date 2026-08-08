@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #05060a;
-  --color-bg-alt: #0a0d16;
-  --color-card: #0d1019;
-  --color-border: #1e2536;
-  --color-text: #e6e9f0;
-  --color-muted: #a8b2c7;
-  --color-accent: #7c5cff;
-  --color-accent-2: #00d4ff;
-  --color-accent-3: #ff5ca8;
+  --color-bg: #0a0a12;
+  --color-bg-alt: #0e0e18;
+  --color-card: #10101c;
+  --color-border: #232336;
+  --color-text: #e8eaf2;
+  --color-muted: #9c96b8;
+  --color-accent: #8b5cf6;
+  --color-accent-2: #22d3ee;
+  --color-accent-3: #4ade80;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Unbounded", "Inter", sans-serif;
 }
 
 html {
@@ -25,14 +26,18 @@ body {
   overflow-x: clip;
 }
 
+h1,
+h2 {
+  font-family: var(--font-display);
+}
+
 ::selection {
-  background: rgba(124, 92, 255, 0.35);
+  background: rgba(139, 92, 246, 0.35);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent-3);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 ::-webkit-scrollbar {
@@ -45,238 +50,32 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-border);
-  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
 }
 
-/* Faded blueprint grid, used behind the hero */
-.bg-grid {
+/* ---------- Subtle starfield, used behind the hero ---------- */
+.stars {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 38%, black, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 38%, black, transparent 75%);
+    radial-gradient(circle, rgba(255, 255, 255, 0.35) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(139, 92, 246, 0.45) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(74, 222, 128, 0.3) 1px, transparent 1.5px);
+  background-size:
+    140px 140px,
+    220px 220px,
+    320px 320px;
+  background-position:
+    0 0,
+    70px 110px,
+    160px 40px;
+  opacity: 0.35;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, black, transparent 78%);
 }
 
-/* ---------- Aurora background (fixed, behind everything) ---------- */
-.aurora {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  background: var(--color-bg);
-}
-
-.aurora-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(110px);
-  opacity: 0.32;
-  will-change: transform;
-}
-
-.aurora-blob-1 {
-  width: 55vw;
-  height: 55vw;
-  top: -22%;
-  left: -12%;
-  background: radial-gradient(closest-side, var(--color-accent), transparent 72%);
-  animation: aurora-drift-1 26s ease-in-out infinite alternate;
-}
-
-.aurora-blob-2 {
-  width: 44vw;
-  height: 44vw;
-  top: 28%;
-  right: -14%;
-  background: radial-gradient(closest-side, var(--color-accent-2), transparent 72%);
-  opacity: 0.22;
-  animation: aurora-drift-2 32s ease-in-out infinite alternate;
-}
-
-.aurora-blob-3 {
-  width: 42vw;
-  height: 42vw;
-  bottom: -24%;
-  left: 28%;
-  background: radial-gradient(closest-side, var(--color-accent-3), transparent 72%);
-  opacity: 0.18;
-  animation: aurora-drift-3 38s ease-in-out infinite alternate;
-}
-
-@keyframes aurora-drift-1 {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(9vw, 6vh) scale(1.15); }
-}
-
-@keyframes aurora-drift-2 {
-  from { transform: translate(0, 0) scale(1.1); }
-  to { transform: translate(-8vw, -7vh) scale(0.95); }
-}
-
-@keyframes aurora-drift-3 {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(7vw, -6vh) scale(1.12); }
-}
-
-@media (max-width: 768px) {
-  .aurora-blob {
-    filter: blur(80px);
-    opacity: 0.22;
-  }
-
-  .aurora-blob-3 {
-    display: none;
-  }
-}
-
-/* ---------- Film-grain noise texture over the aurora ---------- */
-.noise {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.032;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ---------- Glassmorphism cards with gradient border ---------- */
-.glass {
-  position: relative;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-.glass::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    135deg,
-    rgba(124, 92, 255, 0.55),
-    rgba(0, 212, 255, 0.18) 40%,
-    rgba(255, 92, 168, 0.35)
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  opacity: 0.22;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.glass:hover::after {
-  opacity: 0.8;
-}
-
-/* ---------- Glow section titles ---------- */
-.title-glow {
-  background: linear-gradient(180deg, #ffffff, #b7c0e2);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* ---------- Terminal window (hero) ---------- */
-.terminal {
-  border-radius: 1rem;
-  overflow: hidden;
-  background: rgba(5, 6, 10, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
-}
-
-.terminal-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.terminal-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 9999px;
-}
-
-.terminal-body {
-  min-height: 320px;
-  padding: 20px;
-  font-size: 0.8125rem;
-  line-height: 1.75;
-}
-
-.tl {
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.tl-cmd {
-  color: var(--color-text);
-}
-
-.tl-cmd .tl-prompt {
-  color: var(--color-accent-2);
-  font-weight: 600;
-}
-
-.tl-out {
-  color: var(--color-muted);
-}
-
-.tl-ok {
-  color: #3dd68c;
-}
-
-.tl-code {
-  color: #c9d1e3;
-}
-
-.tk-kw {
-  color: #b39dff;
-}
-
-.tk-str {
-  color: #7ee787;
-}
-
-.tk-fn {
-  color: #79c0ff;
-}
-
-.tl-cursor {
-  display: inline-block;
-  width: 0.55em;
-  height: 1.1em;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  background: var(--color-accent-2);
-  animation: cursor-blink 1s steps(2) infinite;
-}
-
-@keyframes cursor-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
+/* ---------- Reveal on scroll ---------- */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -290,61 +89,116 @@ body {
   transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+/* ---------- Section eyebrows: green mono comments ("// 01 — …") ---------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  color: var(--color-accent-3);
 }
 
-/* ---------- Cursor spotlight (hero) ---------- */
-.spotlight {
+/* ---------- Nav link underline micro-interaction ---------- */
+.nav-link {
   position: relative;
+  transition: color 0.2s ease;
 }
 
-.spotlight::after {
+.nav-link::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    600px circle at var(--mx, 50%) var(--my, 40%),
-    rgba(124, 92, 255, 0.14),
-    transparent 65%
-  );
-  pointer-events: none;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: var(--color-accent-3);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
-/* ---------- Card glow follows cursor ---------- */
-article {
-  position: relative;
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
 }
 
-article::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    380px circle at var(--mx, 50%) var(--my, -20%),
-    rgba(0, 212, 255, 0.09),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
+/* ---------- Scrollspy: active nav link ---------- */
+.nav-link.is-active {
+  color: var(--color-text);
 }
 
-article:hover::before {
-  opacity: 1;
+.nav-link.is-active::after {
+  transform: scaleX(1);
 }
 
-/* ---------- Pixel-cube hover effect on buttons (.btn-fx) ---------- */
+/* ---------- FAQ smooth expand ---------- */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+}
+
+details[open] .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+/* JS-driven symmetric close: wins over details[open] while .faq-closing is set */
+details[open].faq-closing .faq-answer {
+  grid-template-rows: 0fr;
+}
+
+/* ---------- Buttons: sharp, violet solid + glow / 1px outline ---------- */
 .btn-fx {
   position: relative;
   overflow: hidden;
+  background: var(--color-accent);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.25s ease;
 }
 
+.btn-fx:hover {
+  box-shadow: 0 0 32px rgba(139, 92, 246, 0.5);
+}
+
+.btn-fx:active {
+  transform: scale(0.97);
+}
+
+/* Sheen sweep on primary buttons (sits under the pixel-cube grid) */
+.btn-fx::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -70%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.btn-fx:hover::before {
+  left: 130%;
+}
+
+.btn-ghost {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.btn-ghost:hover {
+  background-color: rgba(139, 92, 246, 0.08);
+  border-color: var(--color-accent);
+}
+
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
+/* ---------- Pixel-cube hover effect on buttons (.btn-fx) ---------- */
 .fx-grid {
   position: absolute;
   inset: 0;
@@ -366,154 +220,24 @@ article:hover::before {
 }
 
 .btn-fx .fx-cell:nth-child(3n) {
-  background: var(--color-accent-2);
+  background: var(--color-accent-3);
 }
 
-/* ---------- Section eyebrow labels (mono, above section titles) ---------- */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent-2);
-}
-
-.eyebrow::before,
-.eyebrow::after {
-  content: "";
-  width: 24px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
-}
-
-.eyebrow::after {
-  background: linear-gradient(90deg, var(--color-accent-2), var(--color-accent));
-}
-
-/* ---------- Nav link underline micro-interaction ---------- */
-.nav-link {
-  position: relative;
-  transition: color 0.2s ease;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -4px;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.25s ease;
-}
-
-.nav-link:hover::after,
-.nav-link:focus-visible::after {
-  transform: scaleX(1);
-}
-
-/* ---------- Card hover: lift + elevation by brightness (not shadows) ---------- */
-.card-hover {
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.16);
-  background-color: rgba(255, 255, 255, 0.07);
-}
-
-/* ---------- FAQ smooth expand ---------- */
-.faq-answer {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.25s ease;
-}
-
-details[open] .faq-answer {
-  grid-template-rows: 1fr;
-}
-
-/* JS-driven symmetric close: wins over details[open] while .faq-closing is set */
-details[open].faq-closing .faq-answer {
-  grid-template-rows: 0fr;
-}
-
-/* ---------- Buttons: shared motion, press feedback, outer glow ---------- */
-.btn-fx {
-  box-shadow: 0 4px 24px rgba(124, 92, 255, 0.35);
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.25s ease;
-}
-
-.btn-fx:hover {
-  box-shadow: 0 8px 44px rgba(124, 92, 255, 0.55);
-}
-
-.btn-fx:active {
-  transform: scale(0.97);
-}
-
-.btn-ghost {
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    transform 0.15s ease;
-}
-
-.btn-ghost:hover {
-  background-color: rgba(255, 255, 255, 0.06);
-  border-color: color-mix(in srgb, var(--color-border), white 14%);
-}
-
-.btn-ghost:active {
-  transform: scale(0.97);
-}
-
-/* ---------- Sheen sweep on primary buttons (sits under the pixel-cube grid) ---------- */
-.btn-fx::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -70%;
-  width: 45%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transform: skewX(-20deg);
-  transition: left 0.55s ease;
-  pointer-events: none;
-}
-
-.btn-fx:hover::before {
-  left: 130%;
-}
-
-/* ---------- Scroll progress bar ---------- */
+/* ---------- Scroll progress bar (violet -> green) ---------- */
 #scroll-progress {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 2.5px;
+  height: 2px;
   z-index: 60;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-3));
   transform: scaleX(0);
   transform-origin: left;
   pointer-events: none;
 }
 
-/* ---------- Entrance choreography (hero, feed items, chat messages) ---------- */
+/* ---------- Entrance choreography (hero, feed items) ---------- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -534,39 +258,7 @@ details[open].faq-closing .faq-answer {
   animation: fade-up 0.45s ease both;
 }
 
-/* ---------- Living accent gradient in the hero title ---------- */
-.hero-accent {
-  background-size: 220% 220%;
-  animation: gradient-pan 9s ease-in-out infinite;
-}
-
-@keyframes gradient-pan {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* ---------- Slow drift of the hero glow backdrop ---------- */
-.hero-glow {
-  animation: hero-glow 12s ease-in-out infinite alternate;
-}
-
-@keyframes hero-glow {
-  from {
-    opacity: 0.8;
-    transform: translateY(0) scale(1);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-16px) scale(1.05);
-  }
-}
-
-/* ---------- Staggered card reveal (opacity-only: no conflict with .card-hover) ---------- */
+/* ---------- Staggered reveal (opacity-only: no transform conflicts) ---------- */
 .reveal-stagger > * {
   opacity: 0;
 }
@@ -593,15 +285,6 @@ details[open].faq-closing .faq-answer {
 .reveal-stagger.is-visible > *:nth-child(8) { animation-delay: 350ms; }
 .reveal-stagger.is-visible > *:nth-child(9) { animation-delay: 400ms; }
 
-/* ---------- Scrollspy: active nav link ---------- */
-.nav-link.is-active {
-  color: var(--color-text);
-}
-
-.nav-link.is-active::after {
-  transform: scaleX(1);
-}
-
 /* ---------- Skeleton shimmer (activity feed) ---------- */
 .skeleton {
   background: linear-gradient(
@@ -623,7 +306,88 @@ details[open].faq-closing .faq-answer {
   }
 }
 
-/* ---------- Back to top ---------- */
+/* ---------- Terminal window (hero + decorative blocks) ---------- */
+.terminal {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0c0c16;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+}
+
+.terminal-body {
+  min-height: 280px;
+  padding: 20px;
+  font-size: 0.8125rem;
+  line-height: 1.8;
+}
+
+.tl {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tl-cmd {
+  color: var(--color-text);
+}
+
+.tl-prompt {
+  color: var(--color-accent-3);
+  font-weight: 600;
+}
+
+.tl-out {
+  color: var(--color-accent-2);
+}
+
+.tl-ok {
+  color: var(--color-accent-3);
+}
+
+.tl-code {
+  color: #c9d1e3;
+}
+
+.tk-kw {
+  color: #c4b0ff;
+}
+
+.tk-str {
+  color: var(--color-accent-3);
+}
+
+.tk-fn {
+  color: var(--color-accent-2);
+}
+
+.tl-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: var(--color-accent-3);
+  animation: cursor-blink 1s steps(2) infinite;
+}
+
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- Back to top (sharp) ---------- */
 #back-to-top {
   position: fixed;
   right: 1.5rem;
@@ -634,11 +398,8 @@ details[open].faq-closing .faq-answer {
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(12, 12, 22, 0.9);
   color: var(--color-text);
   cursor: pointer;
   opacity: 0;
@@ -657,17 +418,12 @@ details[open].faq-closing .faq-answer {
 }
 
 #back-to-top:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-accent-3);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-
-  .spotlight::after,
-  article::before {
-    display: none;
   }
 
   .fx-grid,
@@ -677,15 +433,19 @@ details[open].faq-closing .faq-answer {
 
   .nav-link,
   .nav-link::after,
-  .card-hover,
   .faq-answer,
   .btn-fx,
   .btn-ghost,
-  #back-to-top {
+  #back-to-top,
+  .reveal {
     transition: none;
   }
 
-  .card-hover:hover,
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
   .btn-fx:active,
   .btn-ghost:active {
     transform: none;
@@ -693,12 +453,8 @@ details[open].faq-closing .faq-answer {
 
   .hero-in,
   .activity-item,
-  .hero-accent,
-  .hero-glow,
   .skeleton,
-  .aurora-blob,
-  .tl-cursor,
-  .glass::after {
+  .tl-cursor {
     animation: none;
   }
 

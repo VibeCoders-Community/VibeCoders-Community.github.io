@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = getUi(lang);
 
-// Owner is shown in a dedicated card, not in the auto-fetched list.
+// Owner is shown as the first row, not in the auto-fetched list.
 const OWNER_ID = "662566746221314069";
 const overrides = t.team.overrides as Record<string, { role: string; text: string }>;
 const members = teamData
@@ -18,72 +18,87 @@ const members = teamData
     ...m,
     ...(overrides[m.username] ?? t.team.defaultMember),
   }));
+
+const ghostColors = ["text-accent/25", "text-accent/10", "text-accent-3/25"];
 ---
 
-<section id="team" class="reveal scroll-mt-20 border-y border-white/[0.06] py-24">
+<section id="team" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <div class="mb-12 text-center">
-      <p class="eyebrow mb-4">{t.team.eyebrow}</p>
-      <h2 class="title-glow mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.team.title}</h2>
-      <p class="mx-auto max-w-2xl text-lg text-muted">{t.team.subtitle}</p>
-    </div>
-    <div class="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <article class="card-hover glass rounded-2xl border-accent/40 p-6">
-        <img
-          src="https://github.com/DARKPIX404.png"
-          alt="DARKPIX avatar"
-          width="64"
-          height="64"
-          loading="lazy"
-          class="mb-4 h-16 w-16 rounded-full ring-2 ring-accent/50"
-        />
-        <h3 class="text-lg font-bold">
-          DARKPIX
-          <span class="ml-1 text-sm font-normal text-muted">(Vladislav Borodatyy)</span>
-        </h3>
-        <p class="mb-2 font-mono text-xs font-semibold tracking-wider text-accent-2 uppercase">
-          {t.team.owner.role}
-        </p>
-        <p class="text-sm text-muted">{t.team.owner.text}</p>
-      </article>
-      {members.map((m) => (
-        <article class="card-hover glass rounded-2xl p-6">
-          {m.avatar ? (
+    <p class="eyebrow mb-6">{t.team.eyebrow}</p>
+    <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+      {t.team.titleStart} <span class="text-accent">{t.team.titleAccent}</span>
+    </h2>
+    <p class="mb-12 max-w-2xl text-lg text-muted">{t.team.subtitle}</p>
+
+    <div class="grid gap-12 lg:grid-cols-[1fr_300px]">
+      <div class="reveal-stagger border-t border-white/[0.07]">
+        <article class="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/[0.07] py-5">
+          <div class="flex min-w-44 items-center gap-3">
             <img
-              src={m.avatar}
-              alt={`${m.display} avatar`}
-              width="64"
-              height="64"
+              src="https://github.com/DARKPIX404.png"
+              alt="DARKPIX avatar"
+              width="36"
+              height="36"
               loading="lazy"
-              class="mb-4 h-16 w-16 rounded-full object-cover ring-2 ring-border"
+              class="h-9 w-9 border border-accent/50"
             />
-          ) : (
-            <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-2xl font-extrabold text-white">
-              {m.display.charAt(0).toUpperCase()}
+            <h3 class="font-bold break-words">DARKPIX</h3>
+          </div>
+          <span class="font-mono text-xs text-accent sm:w-32">{t.team.owner.role}</span>
+          <p class="min-w-48 flex-1 text-sm text-muted">{t.team.owner.text}</p>
+        </article>
+        {members.map((m) => (
+          <article class="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/[0.07] py-5">
+            <div class="flex min-w-44 items-center gap-3">
+              {m.avatar ? (
+                <img
+                  src={m.avatar}
+                  alt={`${m.display} avatar`}
+                  width="36"
+                  height="36"
+                  loading="lazy"
+                  class="h-9 w-9 border border-white/10 object-cover"
+                />
+              ) : (
+                <div class="flex h-9 w-9 items-center justify-center bg-accent font-display text-sm font-bold text-white">
+                  {m.display.charAt(0).toUpperCase()}
+                </div>
+              )}
+              <h3 class="font-bold break-words">{m.display}</h3>
             </div>
-          )}
-          <h3 class="text-lg font-bold break-words">{m.display}</h3>
-          <p class="mb-2 font-mono text-xs font-semibold tracking-wider text-accent-2 uppercase">
-            {m.role}
-          </p>
-          <p class="text-sm text-muted">{m.text}</p>
-        </article>
-      ))}
-      {t.team.roles.map((r) => (
-        <article class="card-hover glass rounded-2xl p-6">
-          <div class="mb-4 text-3xl">{r.icon}</div>
-          <h3 class="mb-2 text-lg font-bold">{r.title}</h3>
-          <p class="text-sm text-muted">{r.text}</p>
-        </article>
-      ))}
+            <span class="font-mono text-xs text-accent sm:w-32">{m.role}</span>
+            <p class="min-w-48 flex-1 text-sm text-muted">{m.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <aside class="lg:border-l lg:border-white/[0.07] lg:pl-10">
+        {t.team.roles.map((r) => (
+          <div class="mb-8">
+            <h3 class="mb-2 flex items-center gap-2 text-lg font-bold">
+              <span aria-hidden="true">{r.icon}</span> {r.title}
+            </h3>
+            <p class="text-sm leading-relaxed text-muted">{r.text}</p>
+          </div>
+        ))}
+        <p class="border border-white/10 p-4 font-mono text-xs leading-relaxed text-accent-3">
+          {t.team.staffNote}
+        </p>
+      </aside>
     </div>
-    <h3 class="title-glow mt-16 mb-8 text-center text-2xl font-extrabold tracking-tight">{t.team.path.title}</h3>
-    <div class="reveal-stagger grid gap-6 sm:grid-cols-3">
-      {t.team.path.steps.map((s) => (
-        <article class="card-hover glass rounded-2xl p-6">
-          <h4 class="mb-2 font-bold text-accent-2">{s.title}</h4>
-          <p class="text-sm text-muted">{s.text}</p>
-        </article>
+
+    <h3 class="mt-20 mb-12 font-display text-2xl font-bold tracking-tight md:text-3xl">{t.team.path.title}</h3>
+    <div class="reveal-stagger grid gap-10 sm:grid-cols-3">
+      {t.team.path.steps.map((s, i) => (
+        <div>
+          <div class={`font-display text-7xl font-extrabold leading-none ${ghostColors[i % ghostColors.length]}`} aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </div>
+          <div class="mt-4 mb-3 text-2xl" aria-hidden="true">{s.icon}</div>
+          <h4 class="mb-2 font-bold">{s.title}</h4>
+          <p class="mb-4 text-sm leading-relaxed text-muted">{s.text}</p>
+          <p class="font-mono text-xs text-accent-3">{s.cmd}</p>
+        </div>
       ))}
     </div>
   </div>

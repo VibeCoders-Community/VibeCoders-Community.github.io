@@ -1,7 +1,7 @@
 """Generate PNG icons for vibecoders.community from the brand mark.
 
 Pillow can't rasterize SVG, so the icon is drawn programmatically:
-a full-bleed rounded square with the accent gradient (#7c5cff -> #00d4ff)
+a sharp square with the neon-terminal gradient (#8B5CF6 -> #22D3EE)
 and a white lightning bolt.
 
 Outputs into public/:
@@ -18,8 +18,8 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-ACCENT = (124, 92, 255)  # #7c5cff
-ACCENT2 = (0, 212, 255)  # #00d4ff
+ACCENT = (139, 92, 246)  # #8B5CF6
+ACCENT2 = (34, 211, 238)  # #22D3EE
 WHITE = (255, 255, 255)
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -46,9 +46,9 @@ def make_icon(size: int) -> Image.Image:
             px[x, y] = tuple(int(ACCENT[i] + (ACCENT2[i] - ACCENT[i]) * p) for i in range(3)) + (255,)
     grad = grad.resize((s, s), Image.BILINEAR)
 
-    # rounded-square mask
+    # sharp square mask (neon-terminal: no rounded corners)
     mask = Image.new("L", (s, s), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, s - 1, s - 1], radius=int(s * 0.24), fill=255)
+    ImageDraw.Draw(mask).rectangle([0, 0, s - 1, s - 1], fill=255)
 
     icon = Image.new("RGBA", (s, s), (0, 0, 0, 0))
     icon.paste(grad, (0, 0), mask)

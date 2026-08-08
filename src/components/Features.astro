@@ -7,21 +7,30 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getUi(lang);
+
+const iconStyles = [
+  "border-accent/40 text-accent",
+  "border-accent-3/40 text-accent-3",
+  "border-accent-2/40 text-accent-2",
+  "border-accent/40 text-accent",
+];
 ---
 
-<section id="features" class="reveal scroll-mt-20 border-y border-white/[0.06] py-24">
+<section id="features" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <div class="mb-12 text-center">
-      <p class="eyebrow mb-4">{t.features.eyebrow}</p>
-      <h2 class="title-glow text-3xl font-extrabold tracking-tight md:text-4xl">{t.features.title}</h2>
-    </div>
-    <ul class="reveal-stagger mx-auto grid max-w-3xl gap-4">
-      {t.features.items.map((f) => (
-        <li class="card-hover glass flex gap-5 rounded-2xl p-6">
-          <span class="text-2xl">{f.tag}</span>
-          <div>
+    <p class="eyebrow mb-6">{t.features.eyebrow}</p>
+    <h2 class="mb-12 text-3xl font-bold tracking-tight md:text-4xl">
+      {t.features.titleStart} <span class="text-accent">{t.features.titleAccent}</span>
+    </h2>
+    <ul class="reveal-stagger border-t border-white/[0.07]">
+      {t.features.items.map((f, i) => (
+        <li class="flex gap-5 border-b border-white/[0.07] py-6">
+          <span class={`flex h-10 w-10 shrink-0 items-center justify-center border text-lg ${iconStyles[i % iconStyles.length]}`}>
+            {f.tag}
+          </span>
+          <div class="min-w-0">
             <h3 class="mb-1 font-bold">{f.title}</h3>
-            <p class="text-sm text-muted">{f.text}</p>
+            <p class="text-sm leading-relaxed text-muted">{f.text}</p>
           </div>
         </li>
       ))}

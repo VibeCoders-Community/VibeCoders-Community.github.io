@@ -7,24 +7,40 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getUi(lang);
+
+const mid = Math.ceil(t.rules.items.length / 2);
+const columns = [t.rules.items.slice(0, mid), t.rules.items.slice(mid)];
 ---
 
-<section id="rules" class="reveal scroll-mt-20 border-y border-white/[0.06] py-24">
+<section id="rules" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
   <div class="mx-auto max-w-5xl px-6">
-    <div class="mb-12 text-center">
-      <p class="eyebrow mb-4">{t.rules.eyebrow}</p>
-      <h2 class="title-glow mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">{t.rules.title}</h2>
-      <p class="mx-auto max-w-2xl text-lg text-muted">{t.rules.subtitle}</p>
-    </div>
-    <div class="reveal-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {t.rules.items.map((r, i) => (
-        <article class="card-hover glass rounded-2xl p-6">
-          <div class="mb-4 font-mono text-sm font-semibold text-accent-2">
-            {String(i + 1).padStart(2, "0")}
-          </div>
-          <h3 class="mb-2 text-lg font-bold">{r.title}</h3>
-          <p class="text-sm text-muted">{r.text}</p>
-        </article>
+    <p class="eyebrow mb-6">{t.rules.eyebrow}</p>
+    <h2 class="mb-12 text-3xl font-bold tracking-tight md:text-4xl">
+      {t.rules.titleStart} <span class="text-accent">{t.rules.titleAccent}</span>
+    </h2>
+    <div class="grid gap-y-10 sm:grid-cols-2 sm:gap-x-12">
+      {columns.map((col, ci) => (
+        <div class={ci === 1 ? "grid gap-10 sm:border-l sm:border-white/[0.07] sm:pl-12" : "grid gap-10"}>
+          {col.map((r, ri) => {
+            const n = ci * mid + ri + 1;
+            return (
+              <div class="flex gap-5">
+                <span
+                  class:list={[
+                    "font-display text-xl font-bold",
+                    n === t.rules.items.length ? "text-accent-3" : "text-accent",
+                  ]}
+                >
+                  {String(n).padStart(2, "0")}
+                </span>
+                <div class="min-w-0">
+                  <h3 class="mb-1.5 font-bold">{r.title}</h3>
+                  <p class="text-sm leading-relaxed text-muted">{r.text}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       ))}
     </div>
   </div>

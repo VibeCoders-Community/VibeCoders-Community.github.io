@@ -1,15 +1,27 @@
 ---
 import { GITHUB_ORG_URL } from "../config";
+import { getUi, type Lang } from "../i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getUi(lang);
 ---
 
-<footer class="border-t border-white/[0.07] py-8">
-  <div class="mx-auto flex max-w-5xl flex-wrap justify-between gap-3 px-6 font-mono text-xs text-muted">
-    <span>© {new Date().getFullYear()} VibeCoders Community</span>
+<footer class="border-t border-line py-8">
+  <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-6 font-mono text-xs text-muted">
+    <span class="flex items-center gap-2">
+      <img src="/img/logo-bolt.webp" alt="" width="16" height="16" class="opacity-80" />
+      © {new Date().getFullYear()} VibeCoders Community
+    </span>
+    <span>{t.join.note}</span>
     <a
       href={`${GITHUB_ORG_URL}/VibeCoders-Community.github.io/blob/main/LICENSE`}
       target="_blank"
       rel="noopener"
-      class="no-underline transition-colors hover:text-text"
+      class="link-cyan"
     >
       MIT License · Brand rights reserved
     </a>

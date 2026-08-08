@@ -16,8 +16,12 @@ const prefixColors: Record<string, string> = {
 };
 ---
 
-<section id="projects" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
-  <div class="mx-auto max-w-5xl px-6">
+<section id="projects" class="reveal relative scroll-mt-20 overflow-hidden border-t border-line py-24">
+  <div class="absolute inset-0" aria-hidden="true">
+    <img src="/img/section-opensource.webp" alt="" loading="lazy" class="h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,18,0.8)] to-[rgba(10,10,18,0.92)]"></div>
+  </div>
+  <div class="relative mx-auto max-w-5xl px-6">
     <p class="eyebrow mb-6">{t.projects.eyebrow}</p>
     <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
       {t.projects.titleStart} <span class="text-accent">{t.projects.titleAccent}</span>
@@ -32,14 +36,14 @@ const prefixColors: Record<string, string> = {
       ))}
     </div>
 
-    <div id="repo-grid" class="reveal-stagger border-t border-white/[0.07]" data-org={GITHUB_ORG}>
+    <div id="repo-grid" class="reveal-stagger border-t border-line" data-org={GITHUB_ORG}>
       {t.projects.cards.map((c) => (
         <div data-repo={c.repo}>
           <a
             href={`https://github.com/${GITHUB_ORG}/${c.repo}`}
             target="_blank"
             rel="noopener"
-            class="flex flex-col gap-1 border-b border-white/[0.07] px-2 py-5 no-underline transition-colors duration-200 hover:bg-white/[0.02] sm:flex-row sm:items-baseline sm:gap-6"
+            class="flex flex-col gap-1 border-b border-line px-2 py-5 no-underline transition-colors duration-200 hover:bg-white/[0.02] sm:flex-row sm:items-baseline sm:gap-6"
           >
             <h3 class="shrink-0 font-bold break-words sm:w-64">{c.name}</h3>
             <p class="min-w-0 flex-1 text-sm text-muted">{c.description}</p>

@@ -22,7 +22,7 @@ const members = teamData
 const ghostColors = ["text-accent/25", "text-accent/10", "text-accent-3/25"];
 ---
 
-<section id="team" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
+<section id="team" class="reveal scroll-mt-20 border-t border-line py-24">
   <div class="mx-auto max-w-5xl px-6">
     <p class="eyebrow mb-6">{t.team.eyebrow}</p>
     <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
@@ -31,8 +31,8 @@ const ghostColors = ["text-accent/25", "text-accent/10", "text-accent-3/25"];
     <p class="mb-12 max-w-2xl text-lg text-muted">{t.team.subtitle}</p>
 
     <div class="grid gap-12 lg:grid-cols-[1fr_300px]">
-      <div class="reveal-stagger border-t border-white/[0.07]">
-        <article class="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/[0.07] py-5">
+      <div class="reveal-stagger border-t border-line">
+        <article class="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-line py-5">
           <div class="flex min-w-44 items-center gap-3">
             <img
               src="https://github.com/DARKPIX404.png"
@@ -40,15 +40,15 @@ const ghostColors = ["text-accent/25", "text-accent/10", "text-accent-3/25"];
               width="36"
               height="36"
               loading="lazy"
-              class="h-9 w-9 border border-accent/50"
+              class="h-9 w-9 rounded-full border border-accent/50 transition-shadow duration-200 hover:border-accent hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]"
             />
-            <h3 class="font-bold break-words">DARKPIX</h3>
+            <h3 class="font-display text-[13px] font-bold break-words">DARKPIX</h3>
           </div>
           <span class="font-mono text-xs text-accent sm:w-32">{t.team.owner.role}</span>
           <p class="min-w-48 flex-1 text-sm text-muted">{t.team.owner.text}</p>
         </article>
         {members.map((m) => (
-          <article class="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-white/[0.07] py-5">
+          <article class="flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-line py-5">
             <div class="flex min-w-44 items-center gap-3">
               {m.avatar ? (
                 <img
@@ -57,14 +57,14 @@ const ghostColors = ["text-accent/25", "text-accent/10", "text-accent-3/25"];
                   width="36"
                   height="36"
                   loading="lazy"
-                  class="h-9 w-9 border border-white/10 object-cover"
+                  class="h-9 w-9 rounded-full border border-line object-cover transition-shadow duration-200 hover:border-accent hover:drop-shadow-[0_0_10px_rgba(139,92,246,0.6)]"
                 />
               ) : (
-                <div class="flex h-9 w-9 items-center justify-center bg-accent font-display text-sm font-bold text-white">
+                <div class="flex h-9 w-9 items-center justify-center rounded-full bg-accent font-display text-sm font-bold text-white">
                   {m.display.charAt(0).toUpperCase()}
                 </div>
               )}
-              <h3 class="font-bold break-words">{m.display}</h3>
+              <h3 class="font-display text-[13px] font-bold break-words">{m.display}</h3>
             </div>
             <span class="font-mono text-xs text-accent sm:w-32">{m.role}</span>
             <p class="min-w-48 flex-1 text-sm text-muted">{m.text}</p>
@@ -72,7 +72,7 @@ const ghostColors = ["text-accent/25", "text-accent/10", "text-accent-3/25"];
         ))}
       </div>
 
-      <aside class="lg:border-l lg:border-white/[0.07] lg:pl-10">
+      <aside class="lg:border-l lg:border-line lg:pl-10">
         {t.team.roles.map((r) => (
           <div class="mb-8">
             <h3 class="mb-2 flex items-center gap-2 text-lg font-bold">
@@ -81,7 +81,7 @@ const ghostColors = ["text-accent/25", "text-accent/10", "text-accent-3/25"];
             <p class="text-sm leading-relaxed text-muted">{r.text}</p>
           </div>
         ))}
-        <p class="border border-white/10 p-4 font-mono text-xs leading-relaxed text-accent-3">
+        <p class="border border-line p-4 font-mono text-xs leading-relaxed text-accent-3">
           {t.team.staffNote}
         </p>
       </aside>

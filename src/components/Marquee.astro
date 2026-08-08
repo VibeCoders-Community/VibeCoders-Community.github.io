@@ -1,0 +1,20 @@
+---
+// Seamless stack marquee (brief 4.12). Items are duplicated for the loop;
+// the second half is aria-hidden. Pause on hover via CSS.
+const stacks = ["Rust", "Python", "C++", "TypeScript", "Go", "JavaScript"];
+---
+
+<div class="marquee border-t border-line py-5" aria-label="Technology stack">
+  <div class="marquee-track font-mono text-sm text-muted">
+    {[0, 1].map((half) => (
+      <div class="flex shrink-0 gap-11" aria-hidden={half === 1 || undefined}>
+        {stacks.map((s) => (
+          <span class="flex items-center gap-11">
+            {s}
+            <span class="text-accent">·</span>
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

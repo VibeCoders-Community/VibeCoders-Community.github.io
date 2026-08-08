@@ -115,6 +115,12 @@ export const ui = {
         cancel: "Cancel",
       },
       created: "✅ Private channel #ticket-0042 created — only you and the mod team can see it.",
+      steps: [
+        "press «Open a ticket»",
+        "pick a category",
+        "#ticket-0042 created",
+        "mod team is on it",
+      ],
       reply: {
         author: "Moderator",
         time: "Today at 6:43 PM",
@@ -417,6 +423,12 @@ export const ui = {
         cancel: "Отмена",
       },
       created: "✅ Создан приватный канал #ticket-0042 — его видишь только ты и команда модераторов.",
+      steps: [
+        "нажми «Открыть тикет»",
+        "выбери категорию",
+        "#ticket-0042 создан",
+        "модераторы уже разбираются",
+      ],
       reply: {
         author: "Модератор",
         time: "Сегодня, в 18:43",

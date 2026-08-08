@@ -6,6 +6,7 @@ export const ui = {
       title: "VibeCoders — AI vibe coding community",
       description:
         "VibeCoders is a friendly AI vibe coding community on Discord. Build with AI agents, share projects, and ship together.",
+      ogImageAlt: "VibeCoders — AI vibe coding community",
     },
     nav: {
       about: "About",
@@ -289,6 +290,7 @@ export const ui = {
       title: "VibeCoders — сообщество AI-вайб-кодинга",
       description:
         "VibeCoders — дружелюбное сообщество AI-вайб-кодинга в Discord. Создавай с AI-агентами, делись проектами и релизь вместе с нами.",
+      ogImageAlt: "VibeCoders — сообщество AI-вайб-кодинга",
     },
     nav: {
       about: "О нас",

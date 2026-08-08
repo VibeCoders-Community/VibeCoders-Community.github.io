@@ -187,6 +187,52 @@ const jsonLd = {
         });
       };
       document.addEventListener("astro:page-load", initScrollFx);
+
+      // Cursor spotlight (--mx/--my on body), layered hero parallax
+      // ([data-parallax], depth 0.01–0.06) and magnetic buttons — brief 4.1/4.11.
+      const initMotion = () => {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+        if (reduce || !fine) return;
+
+        const w = window as unknown as { __motionBound?: boolean };
+        if (!w.__motionBound) {
+          w.__motionBound = true;
+          let raf = false;
+          addEventListener("mousemove", (e) => {
+            if (raf) return;
+            raf = true;
+            requestAnimationFrame(() => {
+              raf = false;
+              document.body.style.setProperty("--mx", `${e.clientX}px`);
+              document.body.style.setProperty("--my", `${e.clientY}px`);
+              const x = e.clientX / innerWidth - 0.5;
+              const y = e.clientY / innerHeight - 0.5;
+              document.querySelectorAll<HTMLElement>("[data-parallax]").forEach((el) => {
+                const depth = Number(el.dataset.parallax);
+                el.style.transform = `translate(${x * depth * 1000}px, ${y * depth * 1000}px)`;
+              });
+            });
+          });
+        }
+
+        // Magnetic buttons: pull 6–8px toward the cursor (per-page elements).
+        document.querySelectorAll<HTMLElement>(".btn-fx, .btn-ghost").forEach((btn) => {
+          if (btn.dataset.magnet) return;
+          btn.dataset.magnet = "1";
+          const clamp = (v: number) => Math.max(-8, Math.min(8, v));
+          btn.addEventListener("mousemove", (e) => {
+            const r = btn.getBoundingClientRect();
+            const dx = (e.clientX - (r.left + r.width / 2)) * 0.18;
+            const dy = (e.clientY - (r.top + r.height / 2)) * 0.25;
+            btn.style.transform = `translate(${clamp(dx)}px, ${clamp(dy)}px)`;
+          });
+          btn.addEventListener("mouseleave", () => {
+            btn.style.transform = "";
+          });
+        });
+      };
+      document.addEventListener("astro:page-load", initMotion);
     </script>
   </body>
 </html>

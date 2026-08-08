@@ -9,13 +9,21 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="about" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
+<section id="about" class="reveal section-grid scroll-mt-20 border-t border-line py-24">
   <div class="mx-auto max-w-5xl px-6">
     <p class="eyebrow mb-6">{t.about.eyebrow}</p>
-    <h2 class="mb-14 max-w-4xl text-2xl leading-[1.2] font-bold tracking-tight sm:text-3xl md:text-4xl">
+    <h2 class="mb-10 max-w-4xl text-2xl leading-[1.2] font-bold tracking-tight sm:text-3xl md:text-4xl">
       <span class="text-text">{t.about.statementStart} </span><span class="text-muted">{t.about.statementMid} </span><span class="text-accent-3">{t.about.statementAccent}</span> <span class="text-muted">{t.about.statementEnd}</span>
     </h2>
-    <div class="reveal-stagger grid gap-10 border-t border-white/[0.07] pt-10 sm:grid-cols-3">
+    <img
+      src="/img/section-community.webp"
+      alt="Ночной хакатон VibeCoders с AI-компаньоном Pixie"
+      width="2048"
+      height="1152"
+      loading="lazy"
+      class="mb-12 w-full border border-line"
+    />
+    <div class="reveal-stagger grid gap-10 border-t border-line pt-10 sm:grid-cols-3">
       {t.about.cards.map((c, i) => (
         <div>
           <div class="mb-4 font-display text-2xl font-bold text-accent">
@@ -26,6 +34,6 @@ const t = getUi(lang);
         </div>
       ))}
     </div>
-    <p class="mt-14 border-t border-white/[0.07] pt-6 font-mono text-sm text-accent-3">{t.about.echo}</p>
+    <p class="mt-14 border-t border-line pt-6 font-mono text-sm text-accent-3">{t.about.echo}</p>
   </div>
 </section>

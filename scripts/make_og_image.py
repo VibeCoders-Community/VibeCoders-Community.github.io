@@ -39,13 +39,15 @@ def glow_text(base: Image.Image, xy: tuple[int, int], text: str, font: ImageFont
 
 
 def main() -> None:
-    img = Image.new("RGBA", (WIDTH, HEIGHT), BG + (255,))
-    draw = ImageDraw.Draw(img)
-
-    # faint violet ambient glow, top-right
-    glow = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    ImageDraw.Draw(glow).ellipse([WIDTH * 0.55, -HEIGHT * 0.5, WIDTH * 1.25, HEIGHT * 0.45], fill=VIOLET + (40,))
-    img.alpha_composite(glow.filter(ImageFilter.GaussianBlur(90)))
+    # hero-bg as the backdrop (center crop, dark veil for text contrast)
+    art = Image.open(ROOT / "public" / "img" / "hero-bg.png").convert("RGB")
+    scale = max(WIDTH / art.width, HEIGHT / art.height)
+    art = art.resize((int(art.width * scale), int(art.height * scale)), Image.LANCZOS)
+    left = (art.width - WIDTH) // 2
+    top = (art.height - HEIGHT) // 2
+    img = art.crop((left, top, left + WIDTH, top + HEIGHT)).convert("RGBA")
+    veil = Image.new("RGBA", (WIDTH, HEIGHT), BG + (115,))
+    img.alpha_composite(veil)
     draw = ImageDraw.Draw(img)
 
     # sharp terminal frame

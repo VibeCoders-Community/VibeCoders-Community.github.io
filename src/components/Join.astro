@@ -10,11 +10,15 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="join" class="reveal scroll-mt-20 border-t border-white/[0.07] py-28">
-  <div class="mx-auto max-w-5xl px-6">
+<section id="join" class="reveal relative scroll-mt-20 overflow-hidden border-t border-line py-28">
+  <div class="absolute inset-0" aria-hidden="true">
+    <img src="/img/section-join-portal.webp" alt="" loading="lazy" class="h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,18,0.72)] to-[rgba(10,10,18,0.88)]"></div>
+  </div>
+  <div class="relative mx-auto max-w-5xl px-6">
     <p class="eyebrow mb-6">{t.join.eyebrow}</p>
     <h2 class="mb-6 text-4xl font-extrabold tracking-tight md:text-6xl">
-      {t.join.titleStart} <span class="text-accent-3 drop-shadow-[0_0_28px_rgba(74,222,128,0.4)]">{t.join.titleAccent}</span>
+      {t.join.titleStart} <span class="text-accent-3 drop-shadow-[0_0_28px_rgba(74,222,128,0.5)]">{t.join.titleAccent}</span>
     </h2>
     <p class="mb-9 max-w-xl text-lg text-muted">
       {t.join.subtitle}
@@ -24,7 +28,7 @@ const t = getUi(lang);
         href={DISCORD_INVITE}
         target="_blank"
         rel="noopener"
-        class="btn-fx px-8 py-4 text-lg font-semibold text-white no-underline"
+        class="btn-fx px-8 py-4 text-lg font-semibold no-underline"
       >
         {t.join.discord}
       </a>
@@ -32,7 +36,7 @@ const t = getUi(lang);
         href={GITHUB_ORG_URL}
         target="_blank"
         rel="noopener"
-        class="btn-ghost border border-white/15 px-8 py-4 text-lg font-semibold no-underline"
+        class="btn-ghost px-8 py-4 text-lg font-semibold no-underline"
       >
         {t.join.github}
       </a>

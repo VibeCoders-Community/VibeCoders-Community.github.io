@@ -10,14 +10,14 @@ const { lang } = Astro.props;
 const t = getUi(lang);
 ---
 
-<section id="activity" class="reveal scroll-mt-20 border-t border-white/[0.07] py-24">
+<section id="activity" class="reveal scroll-mt-20 border-t border-line py-24">
   <div class="mx-auto max-w-5xl px-6">
     <p class="eyebrow mb-6">{t.activity.eyebrow}</p>
     <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">{t.activity.title}</h2>
     <p class="mb-12 max-w-2xl text-lg text-muted">{t.activity.subtitle}</p>
     <ul
       id="activity-feed"
-      class="border-t border-white/[0.07]"
+      class="border-t border-line"
       data-org-url={GITHUB_ORG_URL}
       data-error={t.activity.error}
       data-lang={lang}
@@ -32,7 +32,7 @@ const t = getUi(lang);
       })}
     >
       {[0, 1, 2, 3].map(() => (
-        <li class="flex items-center gap-4 border-b border-white/[0.07] py-4" aria-hidden="true">
+        <li class="flex items-center gap-4 border-b border-line py-4" aria-hidden="true">
           <span class="skeleton h-8 w-8 shrink-0"></span>
           <span class="skeleton h-3.5 min-w-0 flex-1"></span>
           <span class="skeleton h-3 w-16 shrink-0"></span>
@@ -72,8 +72,8 @@ const t = getUi(lang);
     };
 
     const fail = () => {
-      feed.innerHTML = `<li class="border-b border-white/[0.07] py-5 text-sm text-muted">
-        <a href="${orgUrl}" target="_blank" rel="noopener" class="text-accent-2 no-underline hover:underline">${esc(feed.dataset.error!)}</a>
+      feed.innerHTML = `<li class="border-b border-line py-5 text-sm text-muted">
+        <a href="${orgUrl}" target="_blank" rel="noopener" class="link-cyan">${esc(feed.dataset.error!)}</a>
       </li>`;
     };
 
@@ -89,8 +89,8 @@ const t = getUi(lang);
           .map((e, i) => {
             const action = labels[e.type] ?? labels.other;
             const repo = e.repo.name.split("/")[1] ?? e.repo.name;
-            return `<li class="activity-item flex items-center gap-4 border-b border-white/[0.07] py-4 transition-colors duration-200 hover:bg-white/[0.02]" style="animation-delay: ${i * 60}ms">
-              <img src="${e.actor.avatar_url}&s=64" alt="" width="32" height="32" loading="lazy" class="h-8 w-8 shrink-0 border border-white/10" />
+            return `<li class="activity-item flex items-center gap-4 border-b border-line py-4 transition-colors duration-200 hover:bg-white/[0.02]" style="animation-delay: ${i * 60}ms">
+              <img src="${e.actor.avatar_url}&s=64" alt="" width="32" height="32" loading="lazy" class="h-8 w-8 shrink-0 border border-line" />
               <p class="min-w-0 flex-1 text-sm break-words">
                 <span class="font-semibold">${esc(e.actor.display_login)}</span>
                 <span class="text-muted"> ${esc(action)} </span>

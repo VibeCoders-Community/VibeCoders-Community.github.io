@@ -10,15 +10,19 @@ const t = getUi(lang);
 const chat = t.chat;
 ---
 
-<section class="reveal py-24">
-  <div class="mx-auto max-w-5xl px-6">
+<section id="support" class="reveal relative scroll-mt-20 overflow-hidden border-t border-line py-24">
+  <div class="absolute inset-0" aria-hidden="true">
+    <img src="/img/section-tickets.webp" alt="" loading="lazy" class="h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,18,0.75)] to-[rgba(10,10,18,0.9)]"></div>
+  </div>
+  <div class="relative mx-auto max-w-5xl px-6">
     <p class="eyebrow mb-6">{chat.eyebrow}</p>
     <h2 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
       {chat.titleStart} <span class="text-accent">{chat.titleAccent}</span>
     </h2>
     <p class="mb-12 max-w-2xl text-lg text-muted">{chat.subtitle}</p>
 
-    <div class="terminal">
+    <div class="terminal" id="chat-flow">
       <div class="terminal-bar">
         <span class="terminal-dot bg-[#ff5f57]"></span>
         <span class="terminal-dot bg-[#febc2e]"></span>
@@ -26,7 +30,7 @@ const chat = t.chat;
         <span class="ml-3 font-mono text-xs text-muted">VibeCoders · Discord</span>
       </div>
       <div class="grid sm:grid-cols-[220px_1fr]">
-        <aside class="hidden border-r border-white/[0.07] p-4 sm:block">
+        <aside class="hidden border-r border-line p-4 sm:block">
           <p class="mb-2 px-2 font-mono text-[11px] font-semibold tracking-wider text-muted uppercase">
             {chat.channelsLabel}
           </p>
@@ -46,7 +50,7 @@ const chat = t.chat;
           </ul>
         </aside>
         <div class="grid gap-5 p-5">
-          <div class="flex gap-3">
+          <div class="chat-msg flex gap-3" style="--cd: 0ms">
             <div class="flex h-10 w-10 shrink-0 items-center justify-center bg-accent text-lg text-white">⚡</div>
             <div class="min-w-0">
               <p class="text-sm">
@@ -55,18 +59,18 @@ const chat = t.chat;
                 <span class="ml-2 text-xs text-muted">{chat.panel.time}</span>
               </p>
               <p class="mt-1 max-w-lg text-sm text-muted">{chat.panel.text}</p>
-              <button class="btn-fx mt-3 cursor-default px-4 py-2 text-sm font-semibold text-white">
+              <button class="btn-fx mt-3 cursor-default px-4 py-2 text-sm font-semibold">
                 {chat.panel.button}
               </button>
             </div>
           </div>
 
-          <div class="w-full max-w-md border border-white/10 bg-white/[0.03] p-5">
+          <div class="chat-msg w-full max-w-md border border-line bg-bg/60 p-5" style="--cd: 450ms">
             <p class="mb-3 font-bold">{chat.modal.title}</p>
             <label class="mb-1 block font-mono text-[11px] font-semibold tracking-wider text-muted uppercase">
               {chat.modal.field}
             </label>
-            <div class="border border-white/10 bg-white/[0.04] px-3 py-2 text-sm">{chat.modal.value}</div>
+            <div class="border border-line bg-surface px-3 py-2 text-sm">{chat.modal.value}</div>
             <div class="mt-4 flex justify-end gap-2">
               <span class="px-4 py-2 text-sm text-muted">{chat.modal.cancel}</span>
               <span class="bg-accent px-4 py-2 text-sm font-semibold text-white">
@@ -75,10 +79,14 @@ const chat = t.chat;
             </div>
           </div>
 
-          <p class="font-mono text-xs text-accent-3">{chat.created}</p>
+          <p class="chat-msg" style="--cd: 900ms">
+            <span class="inline-block border border-accent-3/50 px-3 py-1.5 font-mono text-xs text-accent-3">
+              {chat.created}
+            </span>
+          </p>
 
-          <div class="flex gap-3">
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center border border-white/10 bg-white/[0.05] text-lg">🔨</div>
+          <div class="chat-msg flex gap-3" style="--cd: 1350ms">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center border border-line bg-surface text-lg">🔨</div>
             <div class="min-w-0">
               <p class="text-sm">
                 <span class="font-semibold text-text">{chat.reply.author}</span>
@@ -90,5 +98,46 @@ const chat = t.chat;
         </div>
       </div>
     </div>
+
+    <ol class="mt-10 grid gap-6 font-mono text-xs text-muted sm:grid-cols-4">
+      {chat.steps.map((s, i) => (
+        <li class="flex items-start gap-2">
+          <span class:list={["font-display text-base font-bold", i === chat.steps.length - 1 ? "text-accent-3" : "text-accent"]}>
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <span class="pt-0.5">
+            {s}
+            {i < chat.steps.length - 1 && <span class="mt-1 hidden text-accent-2 sm:block">→</span>}
+          </span>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
+
+<script>
+  // Chat-flow: messages appear in sequence when the section scrolls into view.
+  const initChatFlow = () => {
+    const flow = document.getElementById("chat-flow");
+    if (!flow || flow.dataset.chatInit) return;
+    flow.dataset.chatInit = "1";
+    const msgs = flow.querySelectorAll<HTMLElement>(".chat-msg");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      msgs.forEach((m) => m.classList.add("in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            msgs.forEach((m) => m.classList.add("in"));
+            io.disconnect();
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(flow);
+  };
+  document.addEventListener("astro:page-load", initChatFlow);
+</script>

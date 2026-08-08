@@ -1,14 +1,10 @@
-"""Generate PNG icons for vibecoders.community from the brand mark.
-
-Pillow can't rasterize SVG, so the icon is drawn programmatically:
-a sharp square with the neon-terminal gradient (#8B5CF6 -> #22D3EE)
-and a white lightning bolt.
+"""Regenerate PNG icons from the brand bolt artwork (img/logo-bolt.png).
 
 Outputs into public/:
-    apple-touch-icon.png  180x180
-    favicon-32.png         32x32
-    icon-192.png          192x192
-    icon-512.png          512x512
+    apple-touch-icon.png  180x180 (solid --bg)
+    favicon-32.png         32x32  (transparent)
+    icon-192.png          192x192 (transparent)
+    icon-512.png          512x512 (transparent)
 
 Run from the repo root:
     uv run --with pillow python scripts/make_icons.py
@@ -16,60 +12,40 @@ Run from the repo root:
 
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
-ACCENT = (139, 92, 246)  # #8B5CF6
-ACCENT2 = (34, 211, 238)  # #22D3EE
-WHITE = (255, 255, 255)
+BG = (10, 10, 18, 255)  # #0A0A12
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "public"
-
-# Draw at 4x and downscale for smooth edges.
-SS = 4
-
-# Same bolt silhouette as the site logo (relative coords).
-BOLT = [
-    (0.585, 0.14), (0.30, 0.56), (0.47, 0.56),
-    (0.40, 0.86), (0.71, 0.42), (0.53, 0.42),
-]
+BOLT = ROOT / "public" / "img" / "logo-bolt.png"
 
 
-def make_icon(size: int) -> Image.Image:
-    s = size * SS
-    # diagonal gradient, computed at 1x and upscaled
-    grad = Image.new("RGBA", (size, size))
-    px = grad.load()
-    for y in range(size):
-        for x in range(size):
-            p = (x + y) / (2 * (size - 1))
-            px[x, y] = tuple(int(ACCENT[i] + (ACCENT2[i] - ACCENT[i]) * p) for i in range(3)) + (255,)
-    grad = grad.resize((s, s), Image.BILINEAR)
+def content_bbox(img: Image.Image) -> Image.Image:
+    """Crop to non-transparent content with a small margin."""
+    alpha = img.getchannel("A")
+    bbox = alpha.getbbox()
+    return img.crop(bbox) if bbox else img
 
-    # sharp square mask (neon-terminal: no rounded corners)
-    mask = Image.new("L", (s, s), 0)
-    ImageDraw.Draw(mask).rectangle([0, 0, s - 1, s - 1], fill=255)
 
-    icon = Image.new("RGBA", (s, s), (0, 0, 0, 0))
-    icon.paste(grad, (0, 0), mask)
-
-    # white bolt, slightly inset
-    pad = s * 0.16
-    inner = s - 2 * pad
-    bolt = ImageDraw.Draw(icon)
-    bolt.polygon([(pad + x * inner, pad + y * inner) for x, y in BOLT], fill=WHITE + (255,))
-
-    return icon.resize((size, size), Image.LANCZOS)
+def make_icon(bolt: Image.Image, size: int, solid_bg: bool) -> Image.Image:
+    canvas = Image.new("RGBA", (size, size), BG if solid_bg else (0, 0, 0, 0))
+    inner = int(size * 0.78)
+    b = bolt.copy()
+    b.thumbnail((inner, inner), Image.LANCZOS)
+    canvas.paste(b, ((size - b.width) // 2, (size - b.height) // 2), b)
+    return canvas
 
 
 def main() -> None:
-    for name, size in [
-        ("apple-touch-icon.png", 180),
-        ("favicon-32.png", 32),
-        ("icon-192.png", 192),
-        ("icon-512.png", 512),
+    bolt = content_bbox(Image.open(BOLT).convert("RGBA"))
+    for name, size, solid in [
+        ("apple-touch-icon.png", 180, True),
+        ("favicon-32.png", 32, False),
+        ("icon-192.png", 192, False),
+        ("icon-512.png", 512, False),
     ]:
-        img = make_icon(size)
+        img = make_icon(bolt, size, solid)
         path = OUT / name
         img.save(path, "PNG")
         print(f"saved {path} ({path.stat().st_size} bytes)")
